@@ -13,6 +13,6 @@ object HelloRoutes:
   case Method.GET -> !!  =>
     ZIO.succeed {
       // Response.text("Hello, World!")
-      Response.json(Hello("Hello, World!").toJson)
+      Response.json(Hello("Hello, Arnold!!!!!").toJson)
     }
   }
