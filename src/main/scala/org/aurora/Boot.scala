@@ -31,7 +31,7 @@ object Boot extends ZIOAppDefault:
       }
       .orDie
 
-  val routes = HelloRoutes.app //++HttpRoutes.app ++ HealthCheckRoutes.app
+  val routes = HelloRoutes.app ++ StaticFileRoutes.app //++HttpRoutes.app ++ HealthCheckRoutes.app
 
   private val program = Server.serve(routes)
 
