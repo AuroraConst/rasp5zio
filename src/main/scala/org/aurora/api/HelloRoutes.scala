@@ -15,4 +15,10 @@ object HelloRoutes:
       // Response.text("Hello, World!")
       Response.json(Hello("Hello, Arnold!!!!!").toJson)
     }
+
+  case Method.GET -> !! / "hello" / name =>
+    ZIO.succeed {
+      // Response.text(s"Hello, $name!")
+      Response.json(Hello(s"Hello, $name!").toJson)
+    }  
   }
