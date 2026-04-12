@@ -31,16 +31,18 @@ object Boot extends ZIOAppDefault:
       }
       .orDie
 
-  val routes = HelloRoutes.app ++HttpRoutes.app ++ HealthCheckRoutes.app
+  val routes = HelloRoutes.app //++HttpRoutes.app ++ HealthCheckRoutes.app
 
   private val program = Server.serve(routes)
 
   override val run =
     program.provide(
-      healthCheckServiceLayer,
-      serverLayer,
-      ApiConfig.layer,
-      repoLayer,
-      postgresLayer,
-      dataSourceLayer,
+      Server.default,
+      // healthCheckServiceLayer,
+      // serverLayer,
+      // ApiConfig.layer,
+      // repoLayer,
+      // postgresLayer,
+      // dataSourceLayer,
+      // ZLayer.succeed(Server.Config.default.port(8081)),
     )

@@ -7,18 +7,12 @@ import zio.json._
 import org.aurora.dto.Hello
 
 
+
 object HelloRoutes: 
-  val app: HttpApp[Any, Nothing] = Http.collectZIO {
-
-  case Method.GET -> !!  =>
-    ZIO.succeed {
-      // Response.text("Hello, World!")
-      Response.json(Hello("Hello, Arnold!!!!!").toJson)
-    }
-
-  case Method.GET -> !! / "hello" / name =>
-    ZIO.succeed {
-      // Response.text(s"Hello, $name!")
-      Response.json(Hello(s"Hello, $name!").toJson)
-    }  
-  }
+  val app = Routes(
+    Method.GET / "hello"        -> Handler.text("hello"),
+    Method.GET / "hello" / string("name") -> 
+      handler{ (name: String, _: Request) => Response.text(s"Hello, $name!") }
+  )
+ 
+  
