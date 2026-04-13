@@ -25,7 +25,7 @@ object StaticFileRoutes:
                               // Accessing the files in the directory
                               val files = file.listFiles.toList.sortBy(_.getName)
                               val base  = "/static/"
-                              val rest  = s"$path"
+                              val rest  = path 
 
                               // Custom UI to list all the files in the directory
                               Handler.template(s"File Explorer ~$base${path}") {
