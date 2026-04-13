@@ -24,7 +24,7 @@ object StaticFileRoutes:
         extractRequest >>> (if (file.isDirectory) {
                               // Accessing the files in the directory
                               val files = file.listFiles.toList.sortBy(_.getName)
-                              val base  = "/static"
+                              val base  = "/static/"
                               val rest  = path
 
                               // Custom UI to list all the files in the directory
