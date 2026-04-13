@@ -35,7 +35,7 @@ object StaticFileRoutes:
                                     li(
                                       a(
                                         href := s"$base${path.encode}${if (path.isRoot) file.getName
-                                          else "/" + file.getName}",
+                                          else file.getName}",
                                         file.getName,
                                       ),
                                     )
