@@ -8,6 +8,7 @@ val testContainersVersion = "0.40.15"
 val zioMockVersion        = "1.0.0-RC11"
 val zioHttpVersion        = "3.4.0"
 val quillVersion          = "4.8.6"
+val scalaTestVersion      = "3.2.19"
 
 lazy val root = (project in file("."))
   .settings(
@@ -58,6 +59,17 @@ lazy val dto = (project in file("dto"))
     )
   )
 
+lazy val mqttClient = (project in file("mqtt-client"))
+  .enablePlugins(GraalVMNativeImagePlugin)  
+  .settings(
+    name := "mqtt-client" ,
+      libraryDependencies ++= Seq(
+      "org.eclipse.paho" % "org.eclipse.paho.client.mqttv3" % "1.2.5",
+      "dev.zio" %% "zio"      % zioVersion,
+      "dev.zio" %% "zio-json" % zioJsonVersion,
+      "org.scalatest" %% "scalatest" % scalaTestVersion % Test
+    )
+  )
 
 lazy val client = (project in file("client"))
   .enablePlugins(GraalVMNativeImagePlugin)  

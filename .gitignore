@@ -8,3 +8,4 @@ logs/
 .bsp/
 .metals/
 postgres-data/
+**/*.lck
