@@ -14,9 +14,9 @@ class FirstTest extends AnyWordSpec with should.Matchers:
 
   "Publishing to Scene" should {
     "work like this" in {
+      import org.aurora.mqttclient.datatypes.SceneTopic.*
       import org.aurora.mqttclient.datatypes.*
-      val sceneRecall = SceneRecall(SceneType.Off()).value
-      val m = SceneMsg[Payload](Scene("zigbee2mqtt/Master Bedroom Lights/set"),sceneRecall)
-      publisher.publish(m.scene.topic, m.jsonPayload, 0, false) 
+      Publisher.publish(MasterBedroomLightsSet(), MasterBedroomLightsSet().SceneType.Off())
+      Publisher.publish(MasterBedroomHeatersSet(),MasterBedroomHeatersSet().HeatingSceneId.On())
     }
   }
