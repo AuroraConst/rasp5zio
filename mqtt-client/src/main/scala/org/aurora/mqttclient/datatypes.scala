@@ -25,6 +25,7 @@ object MasterBedroomLightsSet extends SceneTopic("zigbee2mqtt/Master Bedroom Lig
     override val id = _id
     val topic = MasterBedroomLightsSet
     case On() extends SceneType(0)
+    case Half() extends SceneType(3)
     case Off() extends SceneType(2)
 
 object MasterBedroomHeatersSet extends SceneTopic("zigbee2mqtt/Master Bedroom Heaters/set") :
