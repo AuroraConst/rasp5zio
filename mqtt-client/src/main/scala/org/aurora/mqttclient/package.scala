@@ -23,10 +23,6 @@ object Publisher:
     publisher.connect(options)
 
   def publish(topic:SceneTopic, scenePayload: ScenePayloadId) =
-    println(topic.topicString)
-    println(scenePayload)
-    println(scenePayload.jsonPayload)
-
     publisher.publish(topic.topicString,scenePayload.payload, 0, false) 
 
 
