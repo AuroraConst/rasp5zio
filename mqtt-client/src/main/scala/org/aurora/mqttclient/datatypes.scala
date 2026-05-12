@@ -3,36 +3,33 @@ import zio.json._
 import org.aurora.mqttclient.Publisher
 
 
-trait Publishable[T]: //TODO finish this with a typeclass pattern for publishing varying T and converting to arraybyte payloads
-  def topic: String
-  // def publish() = Publisher.publish(TopicPayload(topic, jsonPayload))
 
-  
-trait ScenePayloadId :
+trait ScenePayloadId  :
   val id: Int
+  val topic: SceneTopic
+  def jsonPayload = SceneRecallPayload(id).toJson
+  def payload:Array[Byte] = jsonPayload.getBytes()
+  def publish() =  Publisher.publish(topic, this)
 
-enum SceneTopic(topic: String) :
+trait SceneTopic(topic: String) :
   val topicString:String = topic
 
-  case MasterBedroomLightsSet() extends SceneTopic("zigbee2mqtt/Master Bedroom Lights/set")
-    enum  SceneType(_id: Int) extends ScenePayloadId :
-      val id = _id
-      case On() extends SceneType(0)
-      case Off() extends SceneType(2)
-      def payload() = 
-        SceneRecallPayload(this.id)
+object MasterBedroomLightsSet extends SceneTopic("zigbee2mqtt/Master Bedroom Lights/set") :
+  enum  SceneType(_id: Int) extends ScenePayloadId :
+    override val id = _id
+    val topic = MasterBedroomLightsSet
+    case On() extends SceneType(0)
+    case Off() extends SceneType(2)
+    
 
 
-  case MasterBedroomHeatersSet() extends SceneTopic("zigbee2mqtt/Master Bedroom Heaters/set") 
-    enum HeatingSceneId(_id:Int) extends ScenePayloadId :
-      val id = _id
-      case On() extends HeatingSceneId(20)
-      case Off() extends HeatingSceneId(21)   
-      case Half() extends HeatingSceneId(22)
-
-
-
-
+object MasterBedroomHeatersSet extends SceneTopic("zigbee2mqtt/Master Bedroom Heaters/set") :
+  enum SceneType(_id:Int) extends ScenePayloadId :
+    override val id = _id
+    val topic = MasterBedroomHeatersSet
+    case On() extends SceneType(20)
+    case Off() extends SceneType(21)   
+    case Half() extends SceneType(22)
 
 
 case class SceneRecall( scene_recall: ScenePayloadId):

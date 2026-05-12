@@ -10,6 +10,7 @@ import org.aurora.dto.Hello
 
 object HelloRoutes: 
   val app = Routes(
+    Method.GET / "" -> Handler.text("Hello, World!"),
     Method.GET / "hello"        -> Handler.text("hello"),
     Method.GET / "hello" / string("name") -> 
       handler{ (name: String, _: Request) => Response.text(s"Hello, $name!") }
