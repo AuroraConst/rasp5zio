@@ -10,8 +10,8 @@ class FirstTest extends AnyWordSpec with should.Matchers:
     "work like this" in {
       import org.aurora.mqttclient.datatypes.*
       MqttSubscriber.subscribe()
-      MasterBedroomHeatersSet.SceneType.Half ().publish()
-      MasterBedroomLightsSet.SceneType.Half().publish() 
+      MasterBedroomHeatersSet.SceneType.On ().publish()
+      MasterBedroomLightsSet.SceneType.On().publish() 
       Thread.sleep(2000)
     }
   }
