@@ -18,15 +18,16 @@ object HelloRoutes:
         .build
     transformer.transform(readmeContent).toOption.getOrElse("Error transforming markdown")    
   val app = Routes(
-    Method.GET / "" ->  {
+    Method.GET / "" ->  handler{
       val s = readme(
-        scala.io.Source.fromResource("README.md").mkString
+         scala.io.Source.fromResource("README.md").mkString
       )
-      // val html = """<!DOCTYPE html> <html><head><title>README</title></head><body>""" + s + """</body></html>"""
-      Handler.html {
-        div(s)
+      println(s)
+      val html = """<!DOCTYPE html> <html><head><title>README</title></head><body>""" + s + """</body></html>"""
+      Response.html(Html.fromString(s))
+        
       }      
-    },
+    ,
     Method.GET / "hello"        -> Handler.text("hello"),
     Method.GET / "hello" / string("name") -> 
       handler{ (name: String, _: Request) => Response.text(s"Hello, $name!") }
