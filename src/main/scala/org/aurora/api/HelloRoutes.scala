@@ -29,8 +29,6 @@ object HelloRoutes:
       val s = readme(
          scala.io.Source.fromResource("README.md").mkString
       )
-      println(s)
-      val html = """<!DOCTYPE html> <html><head><title>README</title></head><body>""" + s + """</body></html>"""
       htmlResponse(s)
         
       }      
@@ -39,5 +37,5 @@ object HelloRoutes:
     Method.GET / "hello" / string("name") -> 
       handler{ (name: String, _: Request) => Response.text(s"Hello, $name!") },
 
-  )
+  ) 
  
