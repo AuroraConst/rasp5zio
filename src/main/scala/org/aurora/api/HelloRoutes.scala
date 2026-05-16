@@ -18,7 +18,7 @@ object HelloRoutes:
         .build
     transformer.transform(readmeContent).toOption.getOrElse("Error transforming markdown")    
   val app = Routes(
-    Method.GET / "h" ->  {
+    Method.GET / "" ->  {
       val s = readme(
         scala.io.Source.fromResource("README.md").mkString
       )
