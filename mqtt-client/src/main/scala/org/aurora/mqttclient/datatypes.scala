@@ -36,3 +36,10 @@ object MasterBedroomHeatersSet extends SceneTopic("zigbee2mqtt/Master Bedroom He
     case Off() extends SceneType(21)   
     case Half() extends SceneType(22)
 
+object GarageBikeCharger extends SceneTopic("zigbee2mqtt/Garage bike charger/set") :
+  enum SceneType(_id:Int) extends ScenePayloadId :
+    override val id = _id
+    
+    val topic = GarageBikeCharger
+    case On() extends SceneType(31)
+    case Off() extends SceneType(35)

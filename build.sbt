@@ -23,6 +23,7 @@ lazy val root = (project in file("."))
       "io.getquill"   %% "quill-jdbc-zio"      % quillVersion excludeAll (
         ExclusionRule(organization = "org.scala-lang.modules")
       ),
+      "org.typelevel" %% "laika-core" % "1.2.0", //for conversion of markdown to html
       "org.postgresql" % "postgresql"          % postgresqlVersion,
       "dev.zio"       %% "zio"                 % zioVersion,
       "dev.zio"       %% "zio-streams"         % zioVersion,
