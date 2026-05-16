@@ -12,6 +12,7 @@ import zio.http.Body.ContentType
 object HelloRoutes: 
   import laika.api.Transformer
   import laika.format.{HTML, Markdown}
+  import laika.config.SyntaxHighlighting
 
   private def htmlResponse(html: String): Response =
     Response(body = Body.fromString(html))
@@ -22,6 +23,7 @@ object HelloRoutes:
     val transformer = Transformer
         .from(Markdown)
         .to(HTML)
+        .using(Markdown.GitHubFlavor, SyntaxHighlighting)
         .build
     transformer.transform(readmeContent).toOption.getOrElse("Error transforming markdown")    
   val app = Routes(
