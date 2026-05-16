@@ -5,12 +5,19 @@ import zio.json._
 
 import zio.http.template._
 import org.aurora.dto.Hello
+import zio.http.Body.ContentType
 
 
 
 object HelloRoutes: 
   import laika.api.Transformer
   import laika.format.{HTML, Markdown}
+
+  private def htmlResponse(html: String): Response =
+    Response(body = Body.fromString(html))
+      .addHeader(Header.ContentType(MediaType.text.html))
+
+
   def readme(readmeContent: String) = 
     val transformer = Transformer
         .from(Markdown)
@@ -24,13 +31,13 @@ object HelloRoutes:
       )
       println(s)
       val html = """<!DOCTYPE html> <html><head><title>README</title></head><body>""" + s + """</body></html>"""
-      Response.html(Html.fromString(s))
+      htmlResponse(s)
         
       }      
     ,
     Method.GET / "hello"        -> Handler.text("hello"),
     Method.GET / "hello" / string("name") -> 
-      handler{ (name: String, _: Request) => Response.text(s"Hello, $name!") }
+      handler{ (name: String, _: Request) => Response.text(s"Hello, $name!") },
+
   )
  
-  

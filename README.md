@@ -8,6 +8,8 @@
 
 ## Note for DNS naming, look at D-Link configuration of names
 ## Zio Rasp5 app
+- [Front End](http://mypi5.local:8080)
+
 ## Gateway D-Link Eagle Pro Model R18
 - [Front End](http://r18-2cfb.local)
 ## PiHole on raspberry pi 4 (where home assistant is installed as well)
@@ -15,7 +17,7 @@
 ## Home Assistant on raspberry pi 4/
 - [Front End](https://homeassistant.local:8123/admin)
 ## Zigbee2Mqtt
-- [Front End](http://192.168.0.200:9090/)
+- [Front End](http://mypi5.local:9090/)
 ## Plex
   [Front End](http://raspnas.local:32400/)
 ## Common Debian cli
@@ -25,5 +27,3 @@
 - docker stop <containername>
 - docker rm <containername>
 
-## [View Web](http://192.168.0.200:8080/hello)
-## [View Web Static Resources](http://192.168.0.200:8080/static)
