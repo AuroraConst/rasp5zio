@@ -17,7 +17,7 @@
 
 ### Zigbee2Mqtt
 - [Front End](http://mypi5.local:9090/)
-- note that the Zigbee Dongle is to *homeassistant.local* using *ser2net* on port 20108 (see configuration.yaml)
+- note that the Zigbee Dongle is attached to *homeassistant.local* using *ser2net* on port 20108 (see configuration.yaml)
 - config file is in */opt/zigbee2mqtt/data/configuration.yaml*
 
 ### Plex
@@ -38,4 +38,5 @@
 -  or --detach flag, Docker starts the container, prints its unique ID, and immediately returns control to your terminal prompt so you can continue running other commands
 
 ### configuring network devices with cli
-- sudo nmtui
+> sudo nmtui
+- (network management tool ui) this is where I configured static IP addresses
