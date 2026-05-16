@@ -3,20 +3,20 @@
 
 
 ## Note for DNS naming, look at D-Link configuration of names
-## Zio Rasp5 app
+### Zio Rasp5 app
 - [Hello](http://mypi5.local:8080/hello)
 - [View static resources](http://mypi5.local:8080/static)
-## Gateway D-Link Eagle Pro Model R18
+### Gateway D-Link Eagle Pro Model R18
 - [Front End](http://r18-2cfb.local)
-## PiHole on raspberry pi 4 (where home assistant is installed as well)
+### PiHole on raspberry pi 4 (where home assistant is installed as well)
 - [Front End](http://homeassistant.local:80/admin/login)
-## Home Assistant on raspberry pi 4/
+### Home Assistant on raspberry pi 4/
 - [Front End](https://homeassistant.local:8123/admin)
-## Zigbee2Mqtt
+### Zigbee2Mqtt
 - [Front End](http://mypi5.local:9090/)
 - note that the Zigbee Dongle is to *homeassistant.local* using *ser2net* on port 20108 (see configuration.yaml)
 - config file is in */opt/zigbee2mqtt/data/configuration.yaml*
-## Plex
+### Plex
   [Front End](http://raspnas.local:32400/)
 
 
