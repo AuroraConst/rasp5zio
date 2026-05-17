@@ -1,11 +1,11 @@
 package org.aurora.mqttclient
 import org.eclipse.paho.client.mqttv3.*
 object MqttSubscriber:
-  val broker = "tcp://192.168.0.199:1883"
+  val broker = mqqtAddress
 
   val clientId = "Arnold"
   val topic : String = "zigbee2mqtt/Plug Master Bedroom Heater"
-  val client = new MqttClient(broker, clientId)
+  val client = new MqttClient(mqqtAddress,clientId)
 
   def subscribe() = 
     client.setCallback(new MqttCallback {

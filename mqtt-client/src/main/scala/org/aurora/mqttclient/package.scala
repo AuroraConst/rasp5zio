@@ -10,10 +10,12 @@ import zio.json._
 import org.aurora.mqttclient.datatypes.SceneRecallPayload
 
 
+val mqqtAddress = "tcp://192.168.0.198:1883"
+
 
 object Publisher:
   val publisherId = UUID.randomUUID().toString()
-  val publisher = new MqttClient("tcp://192.168.0.199:1883", publisherId)
+  val publisher = new MqttClient(mqqtAddress, publisherId)
   val init: Unit =
     val options  = new MqttConnectOptions();
 
