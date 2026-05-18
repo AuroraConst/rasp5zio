@@ -65,6 +65,9 @@ lazy val mqttClient = (project in file("mqtt-client"))
   .settings(
     name := "mqtt-client" ,
     fork := true,
+    //allows reading zio console input otherwise the forked process terminates before any input can be read!!!
+    connectInput := true,  
+
     libraryDependencies ++= Seq(
       "org.eclipse.paho" % "org.eclipse.paho.client.mqttv3" % "1.2.5",
       "dev.zio" %% "zio"      % zioVersion,

@@ -9,9 +9,9 @@ class FirstTest extends AnyWordSpec with should.Matchers:
   "Publishing to Scene" should {
     "work like this" in {
       import org.aurora.mqttclient.datatypes.*
-      MqttSubscriber.subscribe()
-      MasterBedroomHeatersSet.SceneType.Half ().publish()
-      MasterBedroomLightsSet.SceneType.Half().publish() 
+      MqttSubscriber.subscribedClient()
+      MasterBedroomHeatersSet.SceneType.Off ().publish()
+      MasterBedroomLightsSet.SceneType.Off().publish() 
       GarageBikeCharger.SceneType.Off().publish()
     }
   }
