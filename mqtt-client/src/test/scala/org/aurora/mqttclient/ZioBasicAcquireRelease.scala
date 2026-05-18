@@ -36,7 +36,7 @@ object ZioBasicAcquireRelease extends ZIOSpecDefault:
   def acquire: Task[MqttClient]                = 
     Console.printLine("Acquiring MQTT Client resource...") *>
     ZIO.attempt{
-      MqttSubscriber.subscribedClient()
+      MqttSubscriber.subscribedClient
     }
 
   // The recursive loop that takes console input
