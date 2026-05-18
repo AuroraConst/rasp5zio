@@ -1,6 +1,6 @@
-val zioVersion            = "2.0.13"
-val zioJsonVersion        = "0.7.44"
-val zioConfigVersion      = "3.0.7"
+val zioVersion            = "2.1.26"
+val zioJsonVersion        = "0.9.2"
+val zioConfigVersion      = "4.0.7"
 val zioLoggingVersion     = "2.1.11"
 val logbackClassicVersion = "1.4.7"
 val postgresqlVersion     = "42.6.0"
@@ -64,12 +64,20 @@ lazy val mqttClient = (project in file("mqtt-client"))
   .enablePlugins(GraalVMNativeImagePlugin)  
   .settings(
     name := "mqtt-client" ,
-      libraryDependencies ++= Seq(
+    fork := true,
+    libraryDependencies ++= Seq(
       "org.eclipse.paho" % "org.eclipse.paho.client.mqttv3" % "1.2.5",
       "dev.zio" %% "zio"      % zioVersion,
       "dev.zio" %% "zio-json" % zioJsonVersion,
       "org.scalatest" %% "scalatest" % scalaTestVersion % Test
-    )
+    ),
+
+    libraryDependencies ++= Seq(
+      "dev.zio" %% "zio-test"          % "2.1.26" % Test,
+      "dev.zio" %% "zio-test-sbt"      % "2.1.26" % Test,
+      "dev.zio" %% "zio-test-magnolia" % "2.1.26" % Test
+    ),
+    testFrameworks += new TestFramework("zio.test.sbt.ZTestFramework")    
   )
 
 lazy val client = (project in file("client"))
@@ -81,13 +89,13 @@ lazy val client = (project in file("client"))
       "com.lihaoyi" %% "os-lib" % "0.11.7",
       "dev.zio" %% "zio"      % zioVersion,
       "dev.zio" %% "zio-json" % zioJsonVersion,
-      "com.softwaremill.sttp.client4" %% "zio" % "4.0.9" ,
-      "com.softwaremill.sttp.client4"%%"core"%"4.0.9",
+      "com.softwaremill.sttp.client4" %% "zio" % "4.0.23" ,
+      "com.softwaremill.sttp.client4"%%"core"%"4.0.23",
       "org.typelevel" %% "cats-effect" % "3.5.2",
       "com.typesafe" % "config" % "1.4.3",
-      "dev.zio" %% "zio-config" % "4.0.4",
-      "dev.zio" %% "zio-config-typesafe" % "4.0.4",
-      "dev.zio" %% "zio-config-magnolia" % "4.0.4",
+      "dev.zio" %% "zio-config" % zioConfigVersion,
+      "dev.zio" %% "zio-config-typesafe" % zioConfigVersion,
+      "dev.zio" %% "zio-config-magnolia" % zioConfigVersion,
     )
   )
    .dependsOn(dto)

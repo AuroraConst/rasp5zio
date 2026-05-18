@@ -12,26 +12,27 @@ object SceneRecallPayload :
 
 trait ScenePayloadId  :
   val id: Int
-  val topic: SceneTopic
+  lazy val topic: SceneTopic
   def jsonPayload = SceneRecallPayload(id).toJson
   def payload:Array[Byte] = jsonPayload.getBytes()
   def publish() =  Publisher.publish(topic, this)
 
 trait SceneTopic(topic: String) :
-  val topicString:String = topic
+  lazy val topicString:String = topic
 
 object MasterBedroomLightsSet extends SceneTopic("zigbee2mqtt/Master Bedroom Lights/set") :
   enum  SceneType(_id: Int) extends ScenePayloadId :
     override val id = _id
-    val topic = MasterBedroomLightsSet
+    lazy val topic = MasterBedroomLightsSet
     case On() extends SceneType(0)
     case Half() extends SceneType(3)
+    case Dim() extends SceneType(4)
     case Off() extends SceneType(2)
 
 object MasterBedroomHeatersSet extends SceneTopic("zigbee2mqtt/Master Bedroom Heaters/set") :
   enum SceneType(_id:Int) extends ScenePayloadId :
     override val id = _id
-    val topic = MasterBedroomHeatersSet
+    lazy val topic = MasterBedroomHeatersSet
     case On() extends SceneType(20)
     case Off() extends SceneType(21)   
     case Half() extends SceneType(22)
@@ -40,6 +41,6 @@ object GarageBikeCharger extends SceneTopic("zigbee2mqtt/Garage bike charger/set
   enum SceneType(_id:Int) extends ScenePayloadId :
     override val id = _id
     
-    val topic = GarageBikeCharger
+    lazy val topic = GarageBikeCharger
     case On() extends SceneType(31)
     case Off() extends SceneType(35)

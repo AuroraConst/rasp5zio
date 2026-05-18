@@ -11,8 +11,7 @@ class FirstTest extends AnyWordSpec with should.Matchers:
       import org.aurora.mqttclient.datatypes.*
       MqttSubscriber.subscribe()
       MasterBedroomHeatersSet.SceneType.Half ().publish()
-      MasterBedroomLightsSet.SceneType.Off().publish() 
+      MasterBedroomLightsSet.SceneType.Half().publish() 
       GarageBikeCharger.SceneType.Off().publish()
-      // Thread.sleep(2000)
     }
   }

@@ -14,10 +14,10 @@ val mqqtAddress = "tcp://192.168.0.198:1883"
 
 
 object Publisher:
-  val publisherId = UUID.randomUUID().toString()
-  val publisher = new MqttClient(mqqtAddress, publisherId)
-  val init: Unit =
-    val options  = new MqttConnectOptions();
+  lazy val publisherId = UUID.randomUUID().toString() //required to ensure a clean session
+  lazy val publisher = new MqttClient(mqqtAddress, publisherId)
+  lazy val init: Unit =
+    lazy val options  = new MqttConnectOptions();
 
     options.setAutomaticReconnect(true);
     options.setCleanSession(true);
@@ -25,6 +25,7 @@ object Publisher:
     publisher.connect(options)
 
   def publish(topic:SceneTopic, scenePayload: ScenePayloadId) =
+    init //ensure the publisher is connected before publishing
     publisher.publish(topic.topicString,scenePayload.payload, 0, false) 
 
 
