@@ -10,19 +10,23 @@ import zio.test.*
 import org.eclipse.paho.client.mqttv3.MqttClient
 import zio.stream.ZStream
 import java.io.IOException
-import org.aurora.mqttclient.devices.SonoffPlug
-import org.aurora.mqttclient.devices.ThirdReality
+import org.aurora.mqttclient.devices.{SonoffPlugCodec,ThirdRealityPlugCodec,LEDVanceCodec,TempHumid}
+import java.time.temporal.Temporal
 
 // TODO finish this test to demonstrate how to use ZIO's acquire-release pattern for managing resources like MQTT clients.
 
 object ZioDeviceTest extends ZIOSpecDefault:
   import org.aurora.mqttclient.datatypes.*
-  import org.aurora.mqttclient.devices.{Registry, ThirdRealityPlug}
+  import org.aurora.mqttclient.devices.{Registry, ThirdRealityPlugCodec}
   Registry.addDevices(
     Seq(
-      SonoffPlug("Plug Bathroom Heater"),
-      ThirdRealityPlug("Plug Master Bedroom" ),
-      ThirdRealityPlug("Plug Garage")
+      SonoffPlugCodec("Plug Bathroom Heater"),
+      ThirdRealityPlugCodec("Plug Master Bedroom" ),
+      ThirdRealityPlugCodec("Plug Garage"),
+      LEDVanceCodec("Light Bulb1"),
+      LEDVanceCodec("Light Bulb2"),
+      TempHumid("Temp/Humidity Kitchen"),
+      TempHumid("Temp/Humidity Aerogarden")
     )
   )
 
@@ -51,15 +55,23 @@ object ZioDeviceTest extends ZIOSpecDefault:
         (topic, message) => {
           Registry.device(topic).foreach { device =>
             device match {
-              case SonoffPlug(name) =>
+              case SonoffPlugCodec(name) =>
                 val parsedMessage = device.message(message.toString)
                 println(parsedMessage)
-              case ThirdRealityPlug(name) =>
+              case ThirdRealityPlugCodec(name) =>
                 val parsedMessage = device.message(message.toString)
-                val casted  = parsedMessage.asInstanceOf[ThirdReality.RootInterface]
+                val casted  = parsedMessage.asInstanceOf[ThirdRealityPlugCodec.RootInterface]
                 println(s"Garage power: ${casted.power}")
                 println(s"state: ${casted.state}")
-                // println(parsedMessage)
+              case LEDVanceCodec(name) =>
+                val parsedMessage = device.message(message.toString)  
+                println(parsedMessage)
+              case TempHumid(name) => 
+                val parsedMessage = device.message(message.toString)
+                val casted = parsedMessage.asInstanceOf[TempHumid.RootInterface]
+                println(s"Battery: ${casted.battery}")
+                println(s"Humidity: ${casted.humidity}")
+                println(s"Temperature: ${casted.temperature}")
             }
           }
         }    
