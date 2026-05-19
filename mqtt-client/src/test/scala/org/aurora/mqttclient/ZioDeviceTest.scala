@@ -13,7 +13,6 @@ import java.io.IOException
 import org.aurora.mqttclient.devices.{SonoffPlugCodec,ThirdRealityPlugCodec,LEDVanceCodec,TempHumid}
 import java.time.temporal.Temporal
 
-// TODO finish this test to demonstrate how to use ZIO's acquire-release pattern for managing resources like MQTT clients.
 
 object ZioDeviceTest extends ZIOSpecDefault:
   import org.aurora.mqttclient.datatypes.*
