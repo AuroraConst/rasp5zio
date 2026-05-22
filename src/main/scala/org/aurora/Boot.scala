@@ -2,7 +2,7 @@ package org.aurora
 
 import org.aurora.api._
 import org.aurora.api.healthcheck._
-import org.aurora.config.Configuration.ApiConfig
+// import org.aurora.config.Configuration.ApiConfig
 import org.aurora.infrastructure._
 import io.getquill.jdbczio.Quill
 import io.getquill.Literal
@@ -23,13 +23,13 @@ object Boot extends ZIOAppDefault:
 
   private val healthCheckServiceLayer = HealthCheckServiceLive.layer
 
-  private val serverLayer =
-    ZLayer
-      .service[ApiConfig]
-      .flatMap { cfg =>
-        Server.defaultWith(_.binding(cfg.get.host, cfg.get.port))
-      }
-      .orDie
+  // private val serverLayer =
+  //   ZLayer
+  //     .service[ApiConfig]
+  //     .flatMap { cfg =>
+  //       Server.defaultWith(_.binding(cfg.get.host, cfg.get.port))
+  //     }
+  //     .orDie
 
   val routes = HelloRoutes.app ++ StaticFileRoutes.app //++HttpRoutes.app ++ HealthCheckRoutes.app
 

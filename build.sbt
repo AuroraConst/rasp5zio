@@ -1,5 +1,5 @@
 val zioVersion            = "2.1.26"
-val zioJsonVersion        = "0.9.2"
+val zioJsonVersion        = "0.7.44"
 val zioConfigVersion      = "4.0.7"
 val zioLoggingVersion     = "2.1.11"
 val logbackClassicVersion = "1.4.7"
@@ -49,7 +49,7 @@ lazy val root = (project in file("."))
     testFrameworks := Seq(new TestFramework("zio.test.sbt.ZTestFramework")),
   )
   .enablePlugins(JavaAppPackaging)
-  .dependsOn(dto)
+  .dependsOn(dto,mqttClient)
 
 
 lazy val dto = (project in file("dto"))
