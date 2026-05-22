@@ -33,17 +33,22 @@
 
 ## General Notes:
 ### Common Debian cli
-- hostname -I (show current ip information)
-- docker ps -a (list all containers)
-- docker start <containername>
-- docker stop <containername>
-- docker rm <containername>
+- `hostname -I` (show current ip information)
+- `docker ps -a` (list all containers)
+- `docker start <containername>`
+- `docker stop <containername>`
+- `docker rm <containername>`
 
 ### Set up postgres in docker
-- docker compose up -d
+`docker compose up -d`
 - sets up postgres from docker-compose.yml
 - the -d flag runs container in 'detached' mode
 -  or --detach flag, Docker starts the container, prints its unique ID, and immediately returns control to your terminal prompt so you can continue running other commands
+
+### tmux
+- `tmux ls` lists all tmux sessions
+- `ctrl+b d` keyboard shortcut to detach from current tmux session
+- `tmux attach -t <name>` attach to specific terminal session (see `tmux ls`)
 
 ### configuring network devices with cli
 > sudo nmtui
