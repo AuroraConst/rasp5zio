@@ -18,11 +18,10 @@
 ### Mosquitto (MQTT BROKER) on mypi5.local
 - no front end
 - check if service is running
-> sudo systemctl is-active mosquitto
-- or
-> sudo systemctl status mosquitto
+`sudo systemctl is-active mosquitto`
+- or `sudo systemctl status mosquitto`
 - or check the Network Port
-> netstat -tln | grep 1883
+`netstat -tln | grep 1883`
 
 ### Zigbee2Mqtt
 - [Front End](http://mypi5.local:9090/)
