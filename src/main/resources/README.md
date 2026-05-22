@@ -38,6 +38,8 @@
 - `docker start <containername>`
 - `docker stop <containername>`
 - `docker rm <containername>`
+- `free -h` see RAM space
+- `df -h` see drive space
 
 ### Set up postgres in docker
 `docker compose up -d`
