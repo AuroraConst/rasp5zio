@@ -1,3 +1,6 @@
- object MqttService:
-    val a = 1
+
+package org.aurora.application
+
+object MqttService:
+  val a = 1
 

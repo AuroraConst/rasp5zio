@@ -10,7 +10,7 @@ import zio.json._
 import org.aurora.mqttclient.datatypes.SceneRecallPayload
 
 
-val mqqtAddress = "tcp://192.168.0.198:1883"
+val mqqtAddress = "tcp://mypi5.local:1883"
 
 
 object Publisher:

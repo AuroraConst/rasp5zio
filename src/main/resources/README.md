@@ -15,6 +15,15 @@
 ### Home Assistant on raspberry pi 4/
 - [Front End](https://homeassistant.local:8123/admin)
 
+### Mosquitto (MQTT BROKER) on mypi5.local
+- no front end
+- check if service is running
+> sudo systemctl is-active mosquitto
+- or
+> sudo systemctl status mosquitto
+- or check the Network Port
+> netstat -tln | grep 1883
+
 ### Zigbee2Mqtt
 - [Front End](http://mypi5.local:9090/)
 - note that the Zigbee Dongle is attached to *homeassistant.local* using *ser2net* on port 20108 (see configuration.yaml)
