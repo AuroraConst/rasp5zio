@@ -14,7 +14,7 @@ class CodecTest extends AnyWordSpec with should.Matchers:
 
       val json = """{"s":"hello"}"""
 
-      MessageString("hello").toJson shouldEqual """{"s":"hello"}"""
+      MessageString("hello").toJson should be( """{"s":"hello"}""")
 
       json.fromJson[MessageString] shouldEqual Right(MessageString("hello"))
       json.fromJson[MessageString].toOption shouldEqual Some(MessageString("hello"))
