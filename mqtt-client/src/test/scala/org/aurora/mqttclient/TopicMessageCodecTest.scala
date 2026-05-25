@@ -15,22 +15,14 @@ class CodecTest extends AnyWordSpec with should.Matchers:
       val json = """{"s":"hello"}"""
 
       MessageString("hello").toJson shouldEqual """{"s":"hello"}"""
+
+      json.fromJson[MessageString] shouldEqual Right(MessageString("hello"))
+      json.fromJson[MessageString].toOption shouldEqual Some(MessageString("hello"))
+      
       json.fromJson[MessageString] match {
         case Left(error) => fail(s"Failed to parse JSON: $error")
         case Right(result) => result should be ( MessageString("hello"))
       }
-
       
-    }
-  }
-  "Publishing to Scene" should {
-    "work like this" in {
-
-
-
-      // MqttSubscriber.subscribedClient()
-      // MasterBedroomHeatersSet.SceneType.Off ().publish()
-      // MasterBedroomLightsSet.SceneType.Off().publish() 
-      // GarageBikeCharger.SceneType.Off().publish()
     }
   }
