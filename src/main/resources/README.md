@@ -3,8 +3,9 @@
 # Important Notes
 - Starlink uses CGNAT (Carrier-Grade NAT)Starlink  so port forwarding from my router is impossible
 - I need to use Cloud Flair or Tailscale to tunnel
+
 ## Tailscale
-- https://login.tailscale.com/admin/machines/100.77.154.37
+- https://login.tailscale.com/admin/machines
 ## Note for DNS naming, look at D-Link configuration of names
 
 ### Zio Rasp5 app
