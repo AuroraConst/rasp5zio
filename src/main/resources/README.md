@@ -6,6 +6,7 @@
 
 ## Tailscale
 - https://login.tailscale.com/admin/machines
+- note, i had to confure yaml file for zigbee2mqtt to listen to host 0.0.0.0 instead of 192.168.0.200 which means to listen to all network devices (including tailscale's virtual device tailscale0)
 ## Note for DNS naming, look at D-Link configuration of names
 
 ### Zio Rasp5 app
