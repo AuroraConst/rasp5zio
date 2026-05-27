@@ -24,7 +24,7 @@ object ThirdRealityPlugCodec:
     state: String,
     update: Update,
     voltage: Double
-  )
+  ) extends Msg
 
   object RootInterface :
     given JsonCodec[RootInterface] = DeriveJsonCodec.gen[RootInterface]  

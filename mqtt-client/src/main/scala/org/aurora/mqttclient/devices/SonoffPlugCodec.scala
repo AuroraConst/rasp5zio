@@ -11,6 +11,6 @@ case class SonoffPlugCodec(name:String) extends DeviceMessage[SonoffPlugCodec.Ro
 object SonoffPlugCodec:
   case class RootInterface (
     state: String
-  )
+  ) extends Msg
   object RootInterface :
     given JsonCodec[RootInterface] = DeriveJsonCodec.gen[RootInterface]

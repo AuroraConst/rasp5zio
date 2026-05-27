@@ -15,7 +15,7 @@ object LEDVanceCodec:
     linkquality: Int,
     state: String,
     update: Update
-  )
+  ) extends Msg
   object RootInterface :
     given JsonCodec[RootInterface] = DeriveJsonCodec.gen[RootInterface]
 
@@ -25,7 +25,7 @@ object LEDVanceCodec:
     latest_source: Option[String],
     latest_version: Int,
     state: String
-  )
+  ) 
   object Update :
     given JsonCodec[Update] = DeriveJsonCodec.gen[Update]
 

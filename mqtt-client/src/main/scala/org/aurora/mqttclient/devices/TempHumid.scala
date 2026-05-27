@@ -15,7 +15,7 @@ object TempHumid:
     linkquality: Int,
     temperature: Double,
     update: Update
-  )
+  ) extends Msg
 
 
   object RootInterface :

@@ -1,5 +1,10 @@
 # resources/README.md
 
+# Important Notes
+- Starlink uses CGNAT (Carrier-Grade NAT)Starlink  so port forwarding from my router is impossible
+- I need to use Cloud Flair or Tailscale to tunnel
+## Tailscale
+- https://login.tailscale.com/admin/machines/100.77.154.37
 ## Note for DNS naming, look at D-Link configuration of names
 
 ### Zio Rasp5 app
@@ -39,7 +44,10 @@
 - `docker stop <containername>`
 - `docker rm <containername>`
 - `free -h` see RAM space
-- `df -h` see drive space
+- `df -h` (disk free)s ee drives and space
+- `rsync -av --remove-source-files ./srcfileordir  ../destination`
+  1. -a archive (keep permissions) 
+  2. -v verbose
 
 ### Set up postgres in docker
 `docker compose up -d`
