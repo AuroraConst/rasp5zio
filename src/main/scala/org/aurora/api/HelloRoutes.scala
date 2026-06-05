@@ -57,6 +57,7 @@ object HelloRoutes:
     Method.GET / "hello"        -> Handler.text("hello"),
     Method.GET / "hello" / string("name") -> 
       handler{ (name: String, _: Request) => Response.text(s"Hello, $name!") },
+    Method.GET / "pwd"  -> handler{ Response.text(s"Current working directory: ${os.pwd}") },
 
   ).sandbox
  
