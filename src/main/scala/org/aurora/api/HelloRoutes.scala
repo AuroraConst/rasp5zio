@@ -51,8 +51,8 @@ object HelloRoutes:
     transformer.transform(readmeContent).toOption.getOrElse("Error transforming markdown")    
   val app = Routes(
 
-    Method.GET / "" -> handler {Response.redirect(URL(Path.root / "docs/index.html")) },
-    Method.GET / "docs" ->  handler {Response.redirect(URL(Path.root / "docs/index.html")) }, //Handler.fromFile(indexHtmlPath.toIO   ),
+    Method.GET / "" -> handler {Response.redirect(URL(Path.root / "docs" /"index.html")) },
+    Method.GET / "docs" ->  handler {Response.redirect(URL(Path.root / "docs" / "index.html")) }, //Handler.fromFile(indexHtmlPath.toIO   ),
     Method.GET / "docs" / trailing -> docsHandler(),
     Method.GET / "hello"        -> Handler.text("hello"),
     Method.GET / "hello" / string("name") -> 
