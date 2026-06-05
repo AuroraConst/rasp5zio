@@ -70,7 +70,7 @@ object HelloRoutes:
   val config: CorsConfig =
     CorsConfig(
       allowedOrigin = {
-        case origin if origin == Origin.parse("http://localhost:3000").toOption.get =>
+        case origin if origin == Origin.parse("http://localhost:8080").toOption.get =>
           Some(AccessControlAllowOrigin.Specific(origin))
         case _                                                                      => None
       },
