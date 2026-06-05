@@ -14,10 +14,33 @@ object HelloRoutes:
   import laika.format.{HTML, Markdown}
   import laika.config.SyntaxHighlighting
 
+  val path: os.Path = os.pwd
+  val indexHtmlPath = os.pwd / "target" / "docs" / "site" / "index.html"
+  val docsBasePath = os.pwd / "target" / "docs" / "site"  
+
+
   private def htmlResponse(html: String): Response =
     Response(body = Body.fromString(html))
       .addHeader(Header.ContentType(MediaType.text.html))
 
+  private def docsHandler() = 
+    handler{
+      val extractPath    = Handler.param[(Path, Request)](_._1)
+      val extractRequest = Handler.param[(Path, Request)](_._2)
+
+      
+      for{
+         path <- extractPath 
+         result <- {
+          val p = os.RelPath( s"$path")
+          val basePathRevised =  if(p.toString == "") {docsBasePath}
+            else docsBasePath / os.RelPath("/")
+          val finalPath =   basePathRevised / p 
+          Handler.fromFile(finalPath.toIO  )
+         }
+      } yield result
+
+    }
 
   def readme(readmeContent: String) = 
     val transformer = Transformer
@@ -27,17 +50,13 @@ object HelloRoutes:
         .build
     transformer.transform(readmeContent).toOption.getOrElse("Error transforming markdown")    
   val app = Routes(
-    Method.GET / "" ->  handler{
-      val s = readme(
-         scala.io.Source.fromResource("README.md").mkString
-      )
-      htmlResponse(s)
-        
-      }      
-    ,
+
+    Method.GET / "" -> handler {Response.redirect(URL(Path.root / "docs/index.html")) },
+    Method.GET / "docs" ->  handler {Response.redirect(URL(Path.root / "docs/index.html")) }, //Handler.fromFile(indexHtmlPath.toIO   ),
+    Method.GET / "docs" / trailing -> docsHandler(),
     Method.GET / "hello"        -> Handler.text("hello"),
     Method.GET / "hello" / string("name") -> 
       handler{ (name: String, _: Request) => Response.text(s"Hello, $name!") },
 
-  ) 
+  ).sandbox
  

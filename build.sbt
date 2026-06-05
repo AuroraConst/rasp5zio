@@ -38,6 +38,9 @@ lazy val root = (project in file("."))
       "dev.zio"       %% "zio-logging-slf4j" % zioLoggingVersion,
       "ch.qos.logback" % "logback-classic"   % logbackClassicVersion,
 
+      // scala toolkit
+      "org.scala-lang" %% "toolkit" % "0.2.0",
+
       // test
       "dev.zio"      %% "zio-test"                        % zioVersion            % Test,
       "dev.zio"      %% "zio-test-sbt"                    % zioVersion            % Test,
@@ -49,6 +52,7 @@ lazy val root = (project in file("."))
     testFrameworks := Seq(new TestFramework("zio.test.sbt.ZTestFramework")),
   )
   .enablePlugins(JavaAppPackaging)
+  .enablePlugins(LaikaPlugin)
   .dependsOn(dto,mqttClient)
 
 

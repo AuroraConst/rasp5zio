@@ -27,7 +27,7 @@ package devices:
     val name: String
     val topic: String = s"zigbee2mqtt/$name"
     def message(mm:MqttMessage): T = message(mm.toString)
-    def message(message: String): T 
+    def message(jsonPayload: String): T 
 
 
     //TODO finish this method to dispatch the message to the appropriate handler based on the type of the device. This will likely involve pattern matching on the type of the device and then calling the appropriate handler function for that type.
