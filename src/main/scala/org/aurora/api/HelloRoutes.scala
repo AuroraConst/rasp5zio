@@ -58,18 +58,19 @@ object HelloRoutes:
       val extractPath    = Handler.param[(Path, Request)](_._1)
       val extractRequest = Handler.param[(Path, Request)](_._2)
       Handler.text("Hello from docs handler") //docsHandler()
-      // for{
-      //    path <- extractPath 
-      //    result <-  {
-      //     val p = os.RelPath( s"$path")
-      //     val basePathRevised =  if(p.toString == "") {docsBasePath}
-      //       else docsBasePath / os.RelPath("/")
-      //     val finalPath =   basePathRevised / p 
+      for{
+         path <- extractPath 
+         result   <-Handler.text("Hello from docs handler") //docsHandler()
+        //  result <-  {
+        //   val p = os.RelPath( s"$path")
+        //   val basePathRevised =  if(p.toString == "") {docsBasePath}
+        //     else docsBasePath / os.RelPath("/")
+        //   val finalPath =   basePathRevised / p 
 
-      //     Handler.fromFile(finalPath.toIO  )
-      //     Handler.text(finalPath.toString)
-      //    }
-      // } yield result.addHeader(Header.Vary(Header.Origin.name))
+        //   Handler.fromFile(finalPath.toIO  )
+        //   Handler.text(finalPath.toString)
+        //  }
+      } yield result.addHeader(Header.Vary(Header.Origin.name))
     },
     Method.GET / "hello"        -> Handler.text("hello"),
     Method.GET / "hello" / string("name") -> 
