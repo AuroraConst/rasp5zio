@@ -38,8 +38,7 @@ object HelloRoutes:
           val finalPath =   basePathRevised / p 
           Handler.fromFile(finalPath.toIO  )
          }
-      } yield result
-
+      } yield result.addHeader(Header.Vary(Header.Origin.name))
     }
 
   def readme(readmeContent: String) = 
