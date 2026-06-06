@@ -61,6 +61,16 @@ object HelloRoutes:
       for{
          path <- extractPath 
          result   <-Handler.text(os.RelPath( s"$path").toString) //docsHandler()
+         result1  <- {
+          
+          val basePathRevised =  if(p.toString == "") {docsBasePath}
+            else docsBasePath / os.RelPath("/")
+          Handler.text(s"basePathRevised: $basePathRevised") //Handler.fromFile(finalPath.toIO  )
+
+          // Handler.fromFile(finalPath.toIO  )
+          // Handler.text(finalPath.toString)
+         }          
+        } yield result1
          
         //  result <-  {
         //   val p = os.RelPath( s"$path")
