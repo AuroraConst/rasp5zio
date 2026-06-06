@@ -30,7 +30,7 @@ object StaticFileRoutes:
                               val base  = "/static"
                               val rest  = path 
                               // Custom UI to list all the files in the directory
-                              Handler.template(s"Filexxx Explorer ~$base${path}") {
+                              Handler.template(s"File Explorer ~$base${path}") {
                                 ul(
                                   li(a(href := s"$base/${rest.drop(1)}", "..")),
                                   files.map { file =>

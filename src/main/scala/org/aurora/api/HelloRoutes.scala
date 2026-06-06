@@ -18,6 +18,19 @@ object HelloRoutes:
   val indexHtmlPath = os.pwd / "target" / "docs" / "site" / "index.html"
   val docsBasePath = os.pwd / "target" / "docs" / "site"  
 
+  def revisedPath(path:String): String =  
+    for{
+      _ <- ZIO.logInfo(s"Received path: $path")
+    } yield ()
+    if(path == "") s"$docsBasePath"
+      else 
+        {
+          val revisedPath = docsBasePath / os.RelPath(path) 
+          s"$revisedPath"
+        }
+        
+
+
 
   private def htmlResponse(html: String): Response =
     Response(body = Body.fromString(html))
@@ -31,6 +44,7 @@ object HelloRoutes:
          path <- extractPath 
          result <-  {
           val p = os.RelPath( s"$path")
+          
           val basePathRevised =  if(p.toString == "") {docsBasePath}
             else docsBasePath / os.RelPath("/")
           val finalPath =   basePathRevised / p 
@@ -52,9 +66,8 @@ object HelloRoutes:
     
   val app = Routes(
 
-    // Method.GET / "" -> handler {Response.redirect(URL(Path.root / "log"))},//(Path.root / "docs" /"index.html")) },
     Method.GET / "" -> handler {Response.redirect(URL(Path.root / "docs" / "index.html"))},//(Path.root / "docs" /"index.html")) },
-    // Method.GET / "docs" ->  handler {Response.redirect(URL(Path.root / "docs" / "index.html")) }, //Handler.fromFile(indexHtmlPath.toIO   ),
+    Method.GET / "docs" ->  handler {Response.redirect(URL(Path.root / "docs" / "index.html")) }, //Handler.fromFile(indexHtmlPath.toIO   ),
     Method.GET / "docs" / trailing ->   handler{
       val extractPath    = Handler.param[(Path, Request)](_._1)
       val extractRequest = Handler.param[(Path, Request)](_._2)
@@ -63,12 +76,12 @@ object HelloRoutes:
          path <- extractPath 
          result  <- { 
           val encodedPath = path.encode
-          val basePathRevised = if(encodedPath == "") {docsBasePath}
-            else docsBasePath / encodedPath
+          val basePathRevised = revisedPath(encodedPath)
+          
 
-          Handler.fromFile(basePathRevised.toIO  )
+          Handler.fromFile(os.Path(basePathRevised).toIO )
          }          
-        } yield result //.addHeader(Header.Vary(Header.Origin.name))
+        } yield result
          
     },
     Method.GET / "log" -> handler{ 

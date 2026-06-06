@@ -48,8 +48,9 @@ lazy val root = (project in file("."))
       "dev.zio"      %% "zio-mock"                        % zioMockVersion        % Test,
       "com.dimafeng" %% "testcontainers-scala-postgresql" % testContainersVersion % Test,
       "dev.zio"      %% "zio-test-magnolia"               % zioVersion            % Test,
+      "org.scalatest" %% "scalatest"                      % scalaTestVersion      % Test
     ),
-    testFrameworks := Seq(new TestFramework("zio.test.sbt.ZTestFramework")),
+    // testFrameworks := Seq(new TestFramework("zio.test.sbt.ZTestFramework")),
   )
   .enablePlugins(JavaAppPackaging)
   .enablePlugins(LaikaPlugin)
