@@ -60,7 +60,7 @@ object HelloRoutes:
       Handler.text("Hello from docs handler") //docsHandler()
       for{
          path <- extractPath 
-         result   <-Handler.text(os.RelPath( s"$path").toString) //docsHandler()
+        //  result   <-Handler.text(os.RelPath( s"$path").toString) //docsHandler()
          result1  <- {
           
           val basePathRevised =  if(p.toString == "") {docsBasePath}
