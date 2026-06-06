@@ -24,6 +24,20 @@ object Boot extends ZIOAppDefault:
   private val healthCheckServiceLayer = HealthCheckServiceLive.layer
 
 
+  import zio.http.Middleware
+  import zio.http.Middleware.*
+  import zio.http.Header.{AccessControlAllowOrigin, Origin}
+  val config: CorsConfig =
+    CorsConfig(
+      allowedOrigin = {
+        case origin  => Some(AccessControlAllowOrigin.All)
+        // if origin == Origin.parse("http://localhost:8080").toOption.get =>
+        //   Some(AccessControlAllowOrigin.Specific(origin))
+        // case _                                                                      => Some(AccessControlAllowOrigin.All)
+      },
+    )
+
+ 
   // private val serverLayer =
   //   ZLayer
   //     .service[ApiConfig]
@@ -32,9 +46,10 @@ object Boot extends ZIOAppDefault:
   //     }
   //     .orDie
 
-  val routes = HelloRoutes.app ++ StaticFileRoutes.app //++HttpRoutes.app ++ HealthCheckRoutes.app
+  val routes = HelloRoutes.app ++ StaticFileRoutes.app  @@  Middleware.cors(config) //++HttpRoutes.app ++ HealthCheckRoutes.app
 
-  private val program = Server.serve(routes)
+  private val program = Server
+  .serve(routes)
 
   override val run =
     program.provide(

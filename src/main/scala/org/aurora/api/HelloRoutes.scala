@@ -50,8 +50,6 @@ object HelloRoutes:
         .build
     transformer.transform(readmeContent).toOption.getOrElse("Error transforming markdown")    
 
-  import zio.http.Middleware.*
-  import zio.http.Header.{AccessControlAllowOrigin, Origin}
     
   val app = Routes(
 
@@ -63,18 +61,6 @@ object HelloRoutes:
       handler{ (name: String, _: Request) => Response.text(s"Hello, $name!") },
     Method.GET / "pwd"  -> handler{ Response.text(s"Current working directory: ${os.pwd}") },
 
-  ).sandbox  @@ cors(config)
+  ).sandbox  
 
 
-  
-  val config: CorsConfig =
-    CorsConfig(
-      allowedOrigin = {
-        case origin  => Some(AccessControlAllowOrigin.All)
-        // if origin == Origin.parse("http://localhost:8080").toOption.get =>
-        //   Some(AccessControlAllowOrigin.Specific(origin))
-        // case _                                                                      => Some(AccessControlAllowOrigin.All)
-      },
-    )
-
- 
