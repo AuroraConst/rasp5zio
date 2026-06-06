@@ -67,7 +67,7 @@ object HelloRoutes:
             else docsBasePath / path.toString
           Handler.text(s"basePathRevised: $basePathRevised") //Handler.fromFile(finalPath.toIO  )
 
-          // Handler.fromFile(finalPath.toIO  )
+          Handler.fromFile(basePathRevised.toIO  )
           // Handler.text(finalPath.toString)
          }          
         } yield result1
