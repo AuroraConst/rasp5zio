@@ -60,17 +60,14 @@ object HelloRoutes:
       Handler.text("Hello from docs handler") //docsHandler()
       for{
          path <- extractPath 
-        //  result   <-Handler.text(os.RelPath( s"$path").toString) //docsHandler()
-         result1  <- {
-          // val relPath = os.RelPath( "/")
-          val basePathRevised = if(path.encode == "") {docsBasePath}
-            else docsBasePath / path.encode
-          Handler.text(s"basePathRevised: $basePathRevised") //Handler.fromFile(finalPath.toIO  )
+         result  <- {
+          val encodedPath = path.encode
+          val basePathRevised = if(encodedPath == "") {docsBasePath}
+            else docsBasePath / encodedPath
 
           Handler.fromFile(basePathRevised.toIO  )
-          // Handler.text(finalPath.toString)
          }          
-        } yield result1
+        } yield result
          
         //  result <-  {
         //   val p = os.RelPath( s"$path")
