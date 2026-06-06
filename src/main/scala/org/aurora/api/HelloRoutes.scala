@@ -52,7 +52,8 @@ object HelloRoutes:
     
   val app = Routes(
 
-    // Method.GET / "" -> handler {Response.redirect(URL(Path.root / "docs" /"index.html")) },
+    // Method.GET / "" -> handler {Response.redirect(URL(Path.root / "log"))},//(Path.root / "docs" /"index.html")) },
+    Method.GET / "" -> handler {Response.redirect(URL(Path.root / "docs" / "index.html"))},//(Path.root / "docs" /"index.html")) },
     // Method.GET / "docs" ->  handler {Response.redirect(URL(Path.root / "docs" / "index.html")) }, //Handler.fromFile(indexHtmlPath.toIO   ),
     Method.GET / "docs" / trailing ->   handler{
       val extractPath    = Handler.param[(Path, Request)](_._1)
@@ -60,25 +61,20 @@ object HelloRoutes:
       Handler.text("Hello from docs handler") //docsHandler()
       for{
          path <- extractPath 
-         result  <- {
+         result  <- { 
           val encodedPath = path.encode
           val basePathRevised = if(encodedPath == "") {docsBasePath}
             else docsBasePath / encodedPath
 
           Handler.fromFile(basePathRevised.toIO  )
          }          
-        } yield result
+        } yield result //.addHeader(Header.Vary(Header.Origin.name))
          
-        //  result <-  {
-        //   val p = os.RelPath( s"$path")
-        //   val basePathRevised =  if(p.toString == "") {docsBasePath}
-        //     else docsBasePath / os.RelPath("/")
-        //   val finalPath =   basePathRevised / p 
-
-        //   Handler.fromFile(finalPath.toIO  )
-        //   Handler.text(finalPath.toString)
-        //  }
-      // } yield result.addHeader(Header.Vary(Header.Origin.name))
+    },
+    Method.GET / "log" -> handler{ 
+      for {
+        x <-ZIO.logInfo("Hello from log handler").as(Response.text("Logged a message!"))
+      } yield x
     },
     Method.GET / "hello"        -> Handler.text("hello"),
     Method.GET / "hello" / string("name") -> 
