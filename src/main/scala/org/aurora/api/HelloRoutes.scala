@@ -52,8 +52,8 @@ object HelloRoutes:
     
   val app = Routes(
 
-    Method.GET / "" -> handler {Response.redirect(URL(Path.root / "docs" /"index.html")) },
-    Method.GET / "docs" ->  handler {Response.redirect(URL(Path.root / "docs" / "index.html")) }, //Handler.fromFile(indexHtmlPath.toIO   ),
+    // Method.GET / "" -> handler {Response.redirect(URL(Path.root / "docs" /"index.html")) },
+    // Method.GET / "docs" ->  handler {Response.redirect(URL(Path.root / "docs" / "index.html")) }, //Handler.fromFile(indexHtmlPath.toIO   ),
     Method.GET / "docs" / trailing ->   handler{
       val extractPath    = Handler.param[(Path, Request)](_._1)
       val extractRequest = Handler.param[(Path, Request)](_._2)
