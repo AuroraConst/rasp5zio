@@ -31,7 +31,7 @@ object HelloRoutes:
       
       for{
          path <- extractPath 
-         result <- {
+         result <-  {
           val p = os.RelPath( s"$path")
           val basePathRevised =  if(p.toString == "") {docsBasePath}
             else docsBasePath / os.RelPath("/")
@@ -54,8 +54,8 @@ object HelloRoutes:
     
   val app = Routes(
 
-    Method.GET / "" -> handler {Response.redirect(URL(Path.root / "docs" /"index.html")) },
-    Method.GET / "docs" ->  handler {Response.redirect(URL(Path.root / "docs" / "index.html")) }, //Handler.fromFile(indexHtmlPath.toIO   ),
+    // Method.GET / "" -> handler {Response.redirect(URL(Path.root / "docs" /"index.html")) },
+    // Method.GET / "docs" ->  handler {Response.redirect(URL(Path.root / "docs" / "index.html")) }, //Handler.fromFile(indexHtmlPath.toIO   ),
     Method.GET / "docs" / trailing -> docsHandler(),
     Method.GET / "hello"        -> Handler.text("hello"),
     Method.GET / "hello" / string("name") -> 

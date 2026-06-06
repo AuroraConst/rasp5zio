@@ -12,6 +12,9 @@ import zio.http.template._
 object StaticFileRoutes: 
   // A simple app to serve static resource files from a local directory.
   val app = Routes(
+    // Method.GET / "static"  -> handler {
+    //   Response.redirect(URL(Path.root / "static/"))
+    // },
     Method.GET / "static" / trailing -> handler {
       val extractPath    = Handler.param[(Path, Request)](_._1)
       val extractRequest = Handler.param[(Path, Request)](_._2)
@@ -24,13 +27,12 @@ object StaticFileRoutes:
         extractRequest >>> (if (file.isDirectory) {
                               // Accessing the files in the directory
                               val files = file.listFiles.toList.sortBy(_.getName)
-                              val base  = "/static/"
+                              val base  = "/static"
                               val rest  = path 
-
                               // Custom UI to list all the files in the directory
-                              Handler.template(s"File Explorer ~$base${path}") {
+                              Handler.template(s"Filexxx Explorer ~$base${path}") {
                                 ul(
-                                  li(a(href := s"$base$rest", "..")),
+                                  li(a(href := s"$base/${rest.drop(1)}", "..")),
                                   files.map { file =>
                                     
                                     li(
