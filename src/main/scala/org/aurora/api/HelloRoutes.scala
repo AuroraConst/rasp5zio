@@ -81,7 +81,7 @@ object HelloRoutes:
         //   Handler.fromFile(finalPath.toIO  )
         //   Handler.text(finalPath.toString)
         //  }
-      } yield result.addHeader(Header.Vary(Header.Origin.name))
+      // } yield result.addHeader(Header.Vary(Header.Origin.name))
     },
     Method.GET / "hello"        -> Handler.text("hello"),
     Method.GET / "hello" / string("name") -> 
