@@ -36,7 +36,9 @@ object HelloRoutes:
           val basePathRevised =  if(p.toString == "") {docsBasePath}
             else docsBasePath / os.RelPath("/")
           val finalPath =   basePathRevised / p 
-          Handler.fromFile(finalPath.toIO  )
+
+          // Handler.fromFile(finalPath.toIO  )
+          Handler.text(finalPath.toString)
          }
       } yield result.addHeader(Header.Vary(Header.Origin.name))
     }
