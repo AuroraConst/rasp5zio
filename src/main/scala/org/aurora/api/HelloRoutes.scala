@@ -64,7 +64,7 @@ object HelloRoutes:
          result1  <- {
           // val relPath = os.RelPath( "/")
           val basePathRevised = if(path.toString == "") {docsBasePath}
-            else docsBasePath 
+            else docsBasePath / path.toString
           Handler.text(s"basePathRevised: $basePathRevised") //Handler.fromFile(finalPath.toIO  )
 
           // Handler.fromFile(finalPath.toIO  )
