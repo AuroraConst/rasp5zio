@@ -27,8 +27,6 @@ object HelloRoutes:
     handler{
       val extractPath    = Handler.param[(Path, Request)](_._1)
       val extractRequest = Handler.param[(Path, Request)](_._2)
-
-      
       for{
          path <- extractPath 
          result <-  {
@@ -37,7 +35,7 @@ object HelloRoutes:
             else docsBasePath / os.RelPath("/")
           val finalPath =   basePathRevised / p 
 
-          // Handler.fromFile(finalPath.toIO  )
+          Handler.fromFile(finalPath.toIO  )
           Handler.text(finalPath.toString)
          }
       } yield result.addHeader(Header.Vary(Header.Origin.name))
@@ -56,7 +54,23 @@ object HelloRoutes:
 
     // Method.GET / "" -> handler {Response.redirect(URL(Path.root / "docs" /"index.html")) },
     // Method.GET / "docs" ->  handler {Response.redirect(URL(Path.root / "docs" / "index.html")) }, //Handler.fromFile(indexHtmlPath.toIO   ),
-    Method.GET / "docs" / trailing -> docsHandler(),
+    Method.GET / "docs" / trailing ->   handler{
+      val extractPath    = Handler.param[(Path, Request)](_._1)
+      val extractRequest = Handler.param[(Path, Request)](_._2)
+      Handler.text("Hello from docs handler") //docsHandler()
+      // for{
+      //    path <- extractPath 
+      //    result <-  {
+      //     val p = os.RelPath( s"$path")
+      //     val basePathRevised =  if(p.toString == "") {docsBasePath}
+      //       else docsBasePath / os.RelPath("/")
+      //     val finalPath =   basePathRevised / p 
+
+      //     Handler.fromFile(finalPath.toIO  )
+      //     Handler.text(finalPath.toString)
+      //    }
+      // } yield result.addHeader(Header.Vary(Header.Origin.name))
+    },
     Method.GET / "hello"        -> Handler.text("hello"),
     Method.GET / "hello" / string("name") -> 
       handler{ (name: String, _: Request) => Response.text(s"Hello, $name!") },
