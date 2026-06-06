@@ -32,7 +32,7 @@ object Boot extends ZIOAppDefault:
       allowedOrigin = { 
         case origin => 
           Some(AccessControlAllowOrigin.Specific(origin))
-        case _ => None
+        // case _ => None
        }
     )
 
