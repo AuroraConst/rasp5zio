@@ -29,12 +29,12 @@ object Boot extends ZIOAppDefault:
   import zio.http.Header.{AccessControlAllowOrigin, Origin}
   val config: CorsConfig =
     CorsConfig(
-      allowedOrigin = { _ => Some(AccessControlAllowOrigin.All) 
-        // case origin  => Some(AccessControlAllowOrigin.All)
-        // if origin == Origin.parse("http://localhost:8080").toOption.get =>
-        //   Some(AccessControlAllowOrigin.Specific(origin))
-        // case _                                                                      => Some(AccessControlAllowOrigin.All)
-      }
+      // allowedOrigin = { _ => Some(AccessControlAllowOrigin.All) 
+      //   // case origin  => Some(AccessControlAllowOrigin.All)
+      //   // if origin == Origin.parse("http://localhost:8080").toOption.get =>
+      //   //   Some(AccessControlAllowOrigin.Specific(origin))
+      //   // case _                                                                      => Some(AccessControlAllowOrigin.All)
+      // }
     )
 
  
