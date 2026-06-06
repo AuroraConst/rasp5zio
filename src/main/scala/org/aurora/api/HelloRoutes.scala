@@ -62,9 +62,9 @@ object HelloRoutes:
          path <- extractPath 
         //  result   <-Handler.text(os.RelPath( s"$path").toString) //docsHandler()
          result1  <- {
-          
-          val basePathRevised =  if(path.toString == "") {docsBasePath}
-            else docsBasePath / os.RelPath("/")
+          val basePathRevised = docsBasePath
+          // val basePathRevised =  if(path.toString == "") {docsBasePath}
+          //   else docsBasePath / os.RelPath("/")
           Handler.text(s"basePathRevised: $basePathRevised") //Handler.fromFile(finalPath.toIO  )
 
           // Handler.fromFile(finalPath.toIO  )
