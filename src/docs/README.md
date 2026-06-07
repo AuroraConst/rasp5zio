@@ -8,12 +8,12 @@
 ## Tailscale
 - https://login.tailscale.com/admin/machines
 - note, i had to confure yaml file for zigbee2mqtt to listen to host 0.0.0.0 instead of 192.168.0.200 which means to listen to all network devices (including tailscale's virtual device tailscale0)
+
 ## Note for DNS naming, look at D-Link configuration of names
 
 
 # Main
 ## Zio Rasp5 app 🍓
-- [Hello](http://mypi5.local/hello)
 - [View static resources](http://mypi5.local/static)
 
 ## Gateway D-Link Eagle Pro Model R18 🛜
@@ -42,28 +42,7 @@
   [Front End](http://raspnas.local:32400/)
 
 ## General Notes:
-### Common Debian cli
-- `hostname -I` (show current ip information)
-- `docker ps -a` (list all containers)
-- `docker start <containername>`
-- `docker stop <containername>`
-- `docker rm <containername>`
-- `free -h` see RAM space
-- `df -h` (disk free)s ee drives and space
-- `rsync -av --remove-source-files ./srcfileordir  ../destination`
-  1. -a archive (keep permissions) 
-  2. -v verbose
 
-### Set up postgres in docker
-`docker compose up -d`
-- sets up postgres from docker-compose.yml
-- the -d flag runs container in 'detached' mode
--  or --detach flag, Docker starts the container, prints its unique ID, and immediately returns control to your terminal prompt so you can continue running other commands
-
-### tmux
-- `tmux ls` lists all tmux sessions
-- `ctrl+b d` keyboard shortcut to detach from current tmux session
-- `tmux attach -t <name>` attach to specific terminal session (see `tmux ls`)
 
 ### configuring network devices with cli
 > sudo nmtui

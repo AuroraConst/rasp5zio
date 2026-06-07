@@ -1,5 +1,5 @@
 /* Target the entire webpage body */
-body {
+/* body {
   background-color: #fc02f5;
   font-family: Arial, sans-serif;
 }
@@ -9,7 +9,7 @@ header {
   color: white;
   padding: 10px 0;
   text-align: center;
-}
+} */
 /* 
 nav {
   background-color: #f4f4f4;
@@ -18,10 +18,10 @@ nav {
   float: left;
 } */
 
-h1 {
+/* h1 {
   color: #333;
 }
 
 h2 {
   color: #555;
-}
+} */
