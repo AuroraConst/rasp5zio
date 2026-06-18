@@ -1,11 +1,12 @@
 package org.aurora.mqttclient.devices
 
 import zio.json._
-case class ThirdRealityPlugCodec(name:String) extends DeviceMessage[ThirdRealityPlugCodec.RootInterface]:
+import org.aurora.mqttclient.datatypes.Payload
+case class ThirdRealityPlugCodec(name:String) extends DeviceMessage[ThirdRealityPlugCodec.RootInterface] :
   override def message(message: String): ThirdRealityPlugCodec.RootInterface =
     message.fromJson[ThirdRealityPlugCodec.RootInterface] match
-    case Left(error) => throw new RuntimeException(s"Failed to parse JSON: $error")
-    case Right(parsedMessage) => parsedMessage.asInstanceOf[ThirdRealityPlugCodec.RootInterface]
+      case Left(error) => throw new RuntimeException(s"Failed to parse JSON: $error")
+      case Right(parsedMessage) => parsedMessage.asInstanceOf[ThirdRealityPlugCodec.RootInterface]
    
 
 
@@ -24,9 +25,11 @@ object ThirdRealityPlugCodec:
     state: String,
     update: Update,
     voltage: Double
-  ) extends Msg
+  ) extends Msg with Payload :
+      def jsonPayload = this.toJson
 
   object RootInterface :
+    def apply():RootInterface = RootInterface(0,0,0,0.0,0.0,0,0,0.0,None,None,"",Update(0, None, "", 0, ""),0)
     given JsonCodec[RootInterface] = DeriveJsonCodec.gen[RootInterface]  
 
   case class Update (

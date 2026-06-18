@@ -4,13 +4,12 @@ import java.util.UUID
 
 import org.eclipse.paho.client.mqttv3.{IMqttClient, MqttClient}
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions
-import org.aurora.mqttclient.datatypes.SceneTopic
-import org.aurora.mqttclient.datatypes.ScenePayloadId
+import org.aurora.mqttclient.datatypes.{ScenePayloadId,Payload}
 import zio.json._
 import org.aurora.mqttclient.datatypes.SceneRecallPayload
 
 
-val mqqtAddress = "tcp://mypi5.local:1883"
+val mqqtAddress = "tcp://mypi5:1883"
 
 
 object Publisher:
@@ -24,9 +23,23 @@ object Publisher:
     options.setConnectionTimeout(10);
     publisher.connect(options)
 
-  def publish(topic:SceneTopic, scenePayload: ScenePayloadId) =
+  def publish(topic:String, scenePayload: Payload) =
     init //ensure the publisher is connected before publishing
-    publisher.publish(topic.topicString,scenePayload.payload, 0, false) 
+    publisher.publish(topic, scenePayload.payload, 0, false)
+
+  def disconnect() = publisher.disconnect()  
+
+
+
+  def publishFake(topic:String) =
+    init
+    case class RootInterface(
+      countdown_to_turn_off: Int,
+      countdown_to_turn_on: Int
+    )
+    given JsonCodec[RootInterface] = DeriveJsonCodec.gen[RootInterface]
+    publisher.publish(topic, RootInterface(5,0).toJson.getBytes(), 0, false)
+
 
 
 

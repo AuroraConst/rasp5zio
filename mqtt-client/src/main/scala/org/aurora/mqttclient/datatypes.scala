@@ -4,43 +4,44 @@ import org.aurora.mqttclient.Publisher
 
 
 
-
 case class SceneRecallPayload(scene_recall: Int)
 object SceneRecallPayload :
   given JsonCodec[SceneRecallPayload] = DeriveJsonCodec.gen[SceneRecallPayload]  
 
-
-trait ScenePayloadId  :
-  val id: Int
-  lazy val topic: SceneTopic
-  def jsonPayload = SceneRecallPayload(id).toJson
+trait Payload :
+  def jsonPayload:String
   def payload:Array[Byte] = jsonPayload.getBytes()
-  def publish() =  Publisher.publish(topic, this)
 
-trait SceneTopic(topic: String) :
-  lazy val topicString:String = topic
 
-object MasterBedroomLightsSet extends SceneTopic("zigbee2mqtt/Master Bedroom Lights/set") :
+
+trait ScenePayloadId extends Payload :
+  val id: Int
+  def jsonPayload = SceneRecallPayload(id).toJson
+
+trait Topic:
+  val topic: String
+
+
+object MasterBedroomLightsSet extends Topic :
+  override val topic: String = "zigbee2mqtt/Master Bedroom Lights/set"
   enum  SceneType(_id: Int) extends ScenePayloadId :
     override val id = _id
-    lazy val topic = MasterBedroomLightsSet
     case On() extends SceneType(0)
     case Half() extends SceneType(3)
     case Dim() extends SceneType(4)
     case Off() extends SceneType(2)
 
-object MasterBedroomHeatersSet extends SceneTopic("zigbee2mqtt/Master Bedroom Heaters/set") :
+object MasterBedroomHeatersSet extends Topic :
+  override val topic = "zigbee2mqtt/Master Bedroom Heaters/set"
   enum SceneType(_id:Int) extends ScenePayloadId :
     override val id = _id
-    lazy val topic = MasterBedroomHeatersSet
     case On() extends SceneType(20)
     case Off() extends SceneType(21)   
     case Half() extends SceneType(22)
 
-object GarageBikeCharger extends SceneTopic("zigbee2mqtt/Garage bike charger/set") :
+object GarageBikeCharger extends Topic :
+  override val topic = "zigbee2mqtt/Garage bike charger/set"
   enum SceneType(_id:Int) extends ScenePayloadId :
     override val id = _id
-    
-    lazy val topic = GarageBikeCharger
     case On() extends SceneType(31)
     case Off() extends SceneType(35)
