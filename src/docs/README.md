@@ -14,16 +14,16 @@
 
 # Main
 ## Zio Rasp5 app 🍓
-- [View static resources](http://mypi5.local/static)
+- [View static resources](http://./static)
 
 ## Gateway D-Link Eagle Pro Model R18 🛜
-- [Front End](http://r18-2cfb.local)
+- [Front End](http://r18-2cfb)
 
 ## PiHole on raspberry pi 4 (where home assistant is installed as well) 🥧🕳️
-- [Front End](http://homeassistant.local:80/admin/login)
+- [Front End](http://homeassistant:80/admin/login)
 
 ## Home Assistant on raspberry pi 4/
-- [Front End](https://homeassistant.local:8123/admin)
+- [Front End](https://homeassistant:8123/admin)
 
 ## Mosquitto (MQTT BROKER) on mypi5.local
 - no front end
@@ -34,12 +34,12 @@
 `netstat -tln | grep 1883`
 
 ## Zigbee2Mqtt
-- [Front End](http://mypi5.local:9090/)
+- [Front End](http://mypi5:9090/)
 - note that the Zigbee Dongle is attached to *homeassistant.local* using *ser2net* on port 20108 (see configuration.yaml)
 - config file is in */opt/zigbee2mqtt/data/configuration.yaml*
 
 ## Plex
-  [Front End](http://raspnas.local:32400/)
+  [Front End](http://raspnas:32400/)
 
 ## General Notes:
 
