@@ -11,6 +11,10 @@ case class ThirdRealityPlugCodec(name:String) extends DeviceMessage[ThirdReality
 
 
 object ThirdRealityPlugCodec:
+  case class  CountDownSetters(
+    countdown_to_turn_off: Int,
+    countdown_to_turn_on: Int
+  )
   case class RootInterface (
     ac_frequency: Int,
     countdown_to_turn_off: Int,

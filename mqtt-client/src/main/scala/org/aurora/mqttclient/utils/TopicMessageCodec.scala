@@ -1,4 +1,4 @@
-package org.aurora.mqttclient
+package org.aurora.mqttclient.utils
 import zio.json.*
 
 object codec:

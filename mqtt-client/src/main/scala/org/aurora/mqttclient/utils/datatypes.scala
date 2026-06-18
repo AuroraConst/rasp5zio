@@ -1,6 +1,6 @@
 package org.aurora.mqttclient.datatypes
 import zio.json._
-import org.aurora.mqttclient.Publisher
+import org.aurora.mqttclient.utils.Publisher
 
 
 

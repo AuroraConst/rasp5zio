@@ -1,4 +1,4 @@
-package org.aurora.mqttclient
+package org.aurora.mqttclient.utils
 
 import java.util.UUID
 
@@ -34,11 +34,12 @@ object Publisher:
   def publishFake(topic:String) =
     init
     case class RootInterface(
-      countdown_to_turn_off: Int,
-      countdown_to_turn_on: Int
+      countdown_to_turn_on: Int,
+      countdown_to_turn_off: Int = 18000,
+      state: String  = "OFF"
     )
     given JsonCodec[RootInterface] = DeriveJsonCodec.gen[RootInterface]
-    publisher.publish(topic, RootInterface(5,0).toJson.getBytes(), 0, false)
+    publisher.publish(topic, RootInterface(14400,18000,"OFF").toJson.getBytes(), 0, false)
 
 
 

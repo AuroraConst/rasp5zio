@@ -34,7 +34,7 @@ package devices:
     def dispatchMessage(message: T): Unit = ???
 
     def subscribe(): MqttClient = 
-      import org.aurora.mqttclient.MqttSubscriber
+      import org.aurora.mqttclient.utils.MqttSubscriber
       val client = MqttSubscriber.subscribedClient
       client.subscribe(topic,1)
       client
