@@ -14,7 +14,7 @@
 
 # Main
 ## Zio Rasp5 app 🍓
-- [View static resources](http://./static)
+- [View static resources](http://mypi5:8080/static)
 
 ## Gateway D-Link Eagle Pro Model R18 🛜
 - [Front End](http://r18-2cfb)
