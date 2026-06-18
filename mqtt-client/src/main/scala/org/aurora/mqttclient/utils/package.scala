@@ -26,6 +26,7 @@ object Publisher:
   def publish(topic:String, scenePayload: Payload) =
     init //ensure the publisher is connected before publishing
     publisher.publish(topic, scenePayload.payload, 0, false)
+    disconnect()
 
   def disconnect() = publisher.disconnect()  
 
@@ -40,6 +41,7 @@ object Publisher:
     )
     given JsonCodec[RootInterface] = DeriveJsonCodec.gen[RootInterface]
     publisher.publish(topic, RootInterface(14400,18000,"OFF").toJson.getBytes(), 0, false)
+    disconnect()
 
 
 

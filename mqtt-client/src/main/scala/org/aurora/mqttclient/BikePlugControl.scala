@@ -1,0 +1,54 @@
+package org.aurora.mqttclient
+
+
+import org.aurora.mqttclient.devices.ThirdRealityPlugCodec
+import org.aurora.mqttclient.utils.Publisher
+
+
+object BikePlugControl:
+  val device = ThirdRealityPlugCodec("Plug Garage/set")
+  val maxDurationSeconds = 18000 // 5 hours in seconds
+
+  def turnOn: Unit = 
+    Publisher.publish(device.topic, 
+    ThirdRealityPlugCodec.Setters(
+      countdown_to_turn_on = 0,
+      countdown_to_turn_off = maxDurationSeconds,
+      state = "ON"
+    )
+  )
+
+  def turnOff: Unit = 
+    Publisher.publish(device.topic, ThirdRealityPlugCodec.Setters(
+      countdown_to_turn_on = 0,
+      countdown_to_turn_off = 0,
+      state = "OFF"
+    )
+    )
+
+  def startCharging(hour:Int)  =
+    import java.time.{Duration, LocalDateTime, LocalTime, ZoneId, ZonedDateTime}
+    val zoneId: ZoneId = ZoneId.systemDefault()
+    val now = LocalDateTime.now(zoneId)
+    val targetTime = LocalTime.of(hour, 0)
+  
+    // Create today's target hour
+    val nextHour = now.`with`(targetTime)
+  
+    // If it is already past hour AM today, target tomorrow's hour AM
+    val nextHourAdjusted = if now.isAfter(nextHour) then nextHour.plusDays(1) else nextHour
+
+    println(s"Next time: $nextHourAdjusted")
+    println(s"Now: $now")
+  
+    // Calculate the duration in seconds
+    val secondsFromNow = Duration.between(now, nextHourAdjusted).toSeconds.toInt
+    println(s"Seconds until next hour: $secondsFromNow")
+
+    Publisher.publish(device.topic, ThirdRealityPlugCodec.Setters(
+      countdown_to_turn_on = secondsFromNow,
+      countdown_to_turn_off = maxDurationSeconds,
+      state = "OFF"
+    ))
+  
+    

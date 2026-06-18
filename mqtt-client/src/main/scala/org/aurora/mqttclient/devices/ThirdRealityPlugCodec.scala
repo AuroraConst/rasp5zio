@@ -11,10 +11,15 @@ case class ThirdRealityPlugCodec(name:String) extends DeviceMessage[ThirdReality
 
 
 object ThirdRealityPlugCodec:
-  case class  CountDownSetters(
+  case class  Setters(
     countdown_to_turn_off: Int,
-    countdown_to_turn_on: Int
-  )
+    countdown_to_turn_on: Int,
+    state: String  = "OFF"
+  ) extends Payload:
+      override def jsonPayload: String = this.toJson
+  object Setters :
+    given JsonCodec[Setters] = DeriveJsonCodec.gen[Setters]    
+
   case class RootInterface (
     ac_frequency: Int,
     countdown_to_turn_off: Int,

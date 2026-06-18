@@ -6,7 +6,4 @@ import org.aurora.mqttclient.utils.Publisher
 
 
 def main(args: Array[String]): Unit =
-  println(ThirdRealityPlugCodec("Plug Garage/sett").topic)
-  Publisher.publishFake(ThirdRealityPlugCodec("Plug Garage/set").topic)
-  // Publisher.publish(ThirdRealityPlugCodec("Plug Garage/set").topic, ThirdRealityPlugCodec.RootInterface().copy(countdown_to_turn_off = 0))
-  Publisher.disconnect()
+  BikePlugControl.startCharging(4)
