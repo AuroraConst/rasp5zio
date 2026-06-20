@@ -6,4 +6,4 @@ import org.aurora.mqttclient.utils.Publisher
 
 
 def main(args: Array[String]): Unit =
-  BikePlugControl.startCharging(4)
+  BikePlugControl.turnOff
