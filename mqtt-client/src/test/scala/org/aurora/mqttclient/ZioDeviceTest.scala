@@ -1,8 +1,6 @@
 package org.aurora.mqttclient
 
 import org.scalatest._
-import wordspec._
-import matchers._
 
 
 import zio.*
@@ -10,14 +8,12 @@ import zio.test.*
 import org.eclipse.paho.client.mqttv3.MqttClient
 import zio.stream.ZStream
 import java.io.IOException
-import org.aurora.mqttclient.devices.{SonoffPlugCodec,ThirdRealityPlugCodec,LEDVanceCodec,TempHumid}
-import java.time.temporal.Temporal
+import org.aurora.mqttclient.devices.{SonoffPlugCodec,LEDVanceCodec,TempHumid}
 import org.aurora.mqttclient.utils.MqttSubscriber
 import org.aurora.mqttclient.utils.mqqtAddress
 
 
 object ZioDeviceTest extends ZIOSpecDefault:
-  import org.aurora.mqttclient.datatypes.*
   import org.aurora.mqttclient.devices.{Registry, ThirdRealityPlugCodec}
   Registry.addDevices(
     Seq(
@@ -97,7 +93,7 @@ object ZioDeviceTest extends ZIOSpecDefault:
     for {
         _ <- Console.printLine("Starting MQTT Client...")
         r <- acquireReleaseProgram() 
-            .flatMap { resource =>
+            .flatMap { _ =>
               ZStream.fromZIO(loopConsoleInput)
             }
             .runDrain

@@ -1,5 +1,4 @@
 package org.aurora.mqttclient
-import zio.json._
 import org.eclipse.paho.client.mqttv3.{MqttClient, MqttMessage}
 import scala.collection.mutable
 

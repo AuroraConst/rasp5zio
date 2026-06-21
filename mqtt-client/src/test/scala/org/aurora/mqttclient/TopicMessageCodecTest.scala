@@ -3,8 +3,6 @@ package org.aurora.mqttclient
 import org.scalatest._
 import wordspec._
 import matchers._
-import org.aurora.mqttclient.devices.ThirdRealityPlugCodec
-import org.aurora.mqttclient.devices.Registry
 import org.aurora.mqttclient.utils.codec
 
 class CodecTest extends AnyWordSpec with should.Matchers:

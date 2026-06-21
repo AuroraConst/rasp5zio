@@ -2,11 +2,11 @@ package org.aurora.mqttclient.utils
 
 import java.util.UUID
 
-import org.eclipse.paho.client.mqttv3.{IMqttClient, MqttClient}
+import org.eclipse.paho.client.mqttv3.{ MqttClient}
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions
-import org.aurora.mqttclient.datatypes.{ScenePayloadId,Payload}
+import org.aurora.mqttclient.datatypes.{Payload}
 import zio.json._
-import org.aurora.mqttclient.datatypes.SceneRecallPayload
+// import org.aurora.mqttclient.datatypes.SceneRecallPayload
 
 
 val mqqtAddress = "tcp://mypi5:1883"

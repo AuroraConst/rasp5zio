@@ -3,22 +3,29 @@ val zioJsonVersion        = "0.7.44"
 val zioConfigVersion      = "4.0.7"
 val zioLoggingVersion     = "2.1.11"
 val logbackClassicVersion = "1.4.7"
-val postgresqlVersion     = "42.6.0"
-val testContainersVersion = "0.40.15"
-val zioMockVersion        = "1.0.0-RC11"
-val zioHttpVersion        = "3.4.0"
+val postgresqlVersion     = "42.7.11"
+val testContainersVersion = "0.44.1"
+val zioMockVersion        = "1.0.0-RC12"
+val zioHttpVersion        = "3.11.2"
 val quillVersion          = "4.8.6"
-val scalaTestVersion      = "3.2.19"
+val scalaTestVersion      = "3.2.20"
+
+
+val commonSettings = Seq(
+  organization := "org.aurora",
+  scalaVersion := "3.8.4", //when I go higher, I get -Werror where warnings become errors
+  semanticdbEnabled := true,
+  semanticdbVersion := scalafixSemanticdb.revision,
+  scalacOptions := Seq.empty,
+  scalacOptions += "-Wconf:cat=unused:info", 
+)
 
 lazy val root = (project in file("."))
+   
   .settings(
-    inThisBuild(
-      List(
-        organization := "org.aurora",
-        scalaVersion := "3.3.7",
-      )
-    ),
+    commonSettings,
     name           := "rasp5zio",
+
     libraryDependencies ++= Seq(
       "io.getquill"   %% "quill-jdbc-zio"      % quillVersion excludeAll (
         ExclusionRule(organization = "org.scala-lang.modules")
@@ -50,6 +57,7 @@ lazy val root = (project in file("."))
       "dev.zio"      %% "zio-test-magnolia"               % zioVersion            % Test,
       "org.scalatest" %% "scalatest"                      % scalaTestVersion      % Test
     ),
+    dependencyOverrides += "dev.zio" %% "zio-json" % zioJsonVersion,
     // testFrameworks := Seq(new TestFramework("zio.test.sbt.ZTestFramework")),
   )
   .enablePlugins(JavaAppPackaging)
@@ -59,6 +67,7 @@ lazy val root = (project in file("."))
 
 lazy val dto = (project in file("dto"))
   .settings(
+    commonSettings,
     name := "myziotemp-dto",
     libraryDependencies ++= Seq(
       "dev.zio" %% "zio-json" % zioJsonVersion
@@ -68,8 +77,10 @@ lazy val dto = (project in file("dto"))
 lazy val mqttClient = (project in file("mqtt-client"))
   .enablePlugins(GraalVMNativeImagePlugin)  
   .settings(
+    commonSettings,
     name := "mqtt-client" ,
     fork := true,
+
     //allows reading zio console input otherwise the forked process terminates before any input can be read!!!
     connectInput := true,  
 
@@ -91,6 +102,7 @@ lazy val mqttClient = (project in file("mqtt-client"))
 lazy val client = (project in file("client"))
   .enablePlugins(GraalVMNativeImagePlugin)  
   .settings(
+    commonSettings,
     name := "ziotemp-client",
     fork := true,
     libraryDependencies ++= Seq(

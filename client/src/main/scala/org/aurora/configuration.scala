@@ -4,8 +4,7 @@ import zio.*
 import zio.config._
 import zio.config.magnolia._
 import zio.config.typesafe.TypesafeConfigProvider
-import zio.{Config, ZIO, ZIOAppDefault}
-import java.nio.file.Paths
+import zio.ZIO
 import configuration.*
 
 

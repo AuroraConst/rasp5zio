@@ -27,7 +27,7 @@ object BikePlugControl:
     )
 
   def startCharging(hour:Int)  =
-    import java.time.{Duration, LocalDateTime, LocalTime, ZoneId, ZonedDateTime}
+    import java.time.{Duration, LocalDateTime, LocalTime, ZoneId}
     val zoneId: ZoneId = ZoneId.systemDefault()
     val now = LocalDateTime.now(zoneId)
     val targetTime = LocalTime.of(hour, 0)

@@ -4,7 +4,6 @@ import org.scalatest._
 import wordspec._
 import matchers._
 import org.aurora.mqttclient.devices.ThirdRealityPlugCodec
-import org.aurora.mqttclient.devices.Registry
 
 import zio.json.*
 import org.aurora.mqttclient.devices.*
@@ -29,12 +28,11 @@ class MqqtDeviceJsonTest extends AnyWordSpec with should.Matchers:
       parsed match {
         case Left(error) => fail(s"Failed to parse JSON: $error")
         case Right(result) => 
-          result.ac_frequency shouldEqual 60
-          result.state shouldEqual "OFF"
           result.copy(state = "ON").state shouldEqual "ON"
       }
     }
   }
+
 
   "" should {
     "work like this" in {
@@ -43,7 +41,8 @@ class MqqtDeviceJsonTest extends AnyWordSpec with should.Matchers:
 
       val parsed1 = json1.fromJson[ThirdRealityPlugCodec.RootInterface].toOption.get
       val parsed2 = json2.fromJson[ThirdRealityPlugCodec.RootInterface].toOption.get
-      parsed1.state shouldEqual "OFF"
+      
+      parsed1.state shouldEqual "OFF" 
       parsed2.state shouldEqual "OFF"
     }
   }

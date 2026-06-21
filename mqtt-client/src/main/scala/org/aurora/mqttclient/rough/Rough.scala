@@ -28,4 +28,4 @@ object Plug extends Publish :
 
 def main(args: Array[String]): Unit =
   Light.publish(Light.LightCmds.LightOn) // This works because Light is both a CmdType and a Publish
-  Plug.publish(Light.LightCmds.LightOn) // This works because Plug is both a CmdType and a Publish
+  Plug.publish(Plug.PlugCmds.PlugOn) // This works because Plug is both a CmdType and a Publish

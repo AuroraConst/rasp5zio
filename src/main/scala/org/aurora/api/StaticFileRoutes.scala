@@ -1,10 +1,8 @@
 package org.aurora.api
 import zio._
 import zio.http._
-import zio.json._
 
 
-import org.aurora.dto.Hello
 import zio.http.codec.PathCodec.trailing
 import zio.http.template._
 

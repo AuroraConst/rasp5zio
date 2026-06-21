@@ -9,7 +9,6 @@ class ZioConfigMqttLayerTest extends AnyWordSpec with should.Matchers:
 
   import zio.*
   import org.eclipse.paho.client.mqttv3.MqttConnectOptions
-  import org.eclipse.paho.client.mqttv3.{IMqttClient, MqttClient}
 
   trait MqttClientService :
     val address: UIO[String]

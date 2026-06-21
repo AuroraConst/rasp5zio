@@ -1,8 +1,6 @@
 package org.aurora.mqttclient
 
 import org.scalatest._
-import wordspec._
-import matchers._
 
 
 import zio.*

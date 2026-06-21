@@ -1,13 +1,11 @@
 package org.aurora
 
 import zio._
-import sttp.client4.*
-import sttp.client4.httpclient.zio.*  
+import sttp.client4.*  
 import sttp.client4.httpclient.zio.HttpClientZioBackend
 import sttp.model.Uri
 import zio.json._
 import configuration.{appConfigLayer,AppConfig}
-import org.aurora.dto.JSCodeced
 
 package object client :
   val baseUri = uri"http://localhost:8080"
@@ -20,7 +18,6 @@ package object client :
   import org.aurora.dto.Hello
   def get():  ZIO[AppConfig & Scope, Throwable|String, Unit] =
     for {
-      appConfig <- ZIO.service[AppConfig]
       backend   <- HttpClientZioBackend.scoped()
       response  <- basicRequest
         .get(uri"${baseUri}")
@@ -32,7 +29,6 @@ package object client :
 
   def get(uri: Uri):  ZIO[AppConfig & Scope, Throwable|String, String] =
     for {
-      appConfig <- ZIO.service[AppConfig]
       backend   <- HttpClientZioBackend.scoped()
       response  <- basicRequest
         .get(uri)
