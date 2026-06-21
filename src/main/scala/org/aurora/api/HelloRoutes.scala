@@ -9,8 +9,10 @@ import zio.http.template._
 import org.aurora.dto.Hello
 import zio.http.Body.ContentType
 
-
-
+/**
+ * for more information on zio handlers:
+  https://ziohttp.com/reference/handler/
+*/
 object HelloRoutes: 
   import laika.api.Transformer
   import laika.format.{HTML, Markdown}
