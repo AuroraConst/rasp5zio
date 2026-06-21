@@ -68,11 +68,11 @@ object HelloRoutes:
     Method.GET / "" -> handler {Response.redirect(URL(Path.root / "docs" / "index.html"))},//(Path.root / "docs" /"index.html")) },
     Method.GET / "docs" ->  handler {Response.redirect(URL(Path.root / "docs" / "index.html")) }, 
     Method.GET / "docs" / trailing ->   handler{
-      val pathExtractor: Handler[Any, Nothing, (Path, Request), Path] = 
-        Handler.param[(Path, Request)](_._1)
+      val pathExtractor: Handler[Any, Nothing, (Path, Request), Path] = //last types are input tuple to  output path
+        Handler.param[(Path, Request)](_._1)  //returns the path
 
-      val requestExtractor: Handler[Any, Nothing, (Path, Request), Request] =
-        Handler.param[(Path, Request)](_._2)
+      // val requestExtractor: Handler[Any, Nothing, (Path, Request), Request] =  //request is not used
+      //   Handler.param[(Path, Request)](_._2)
 
       def staticFileHandler(path: Path): Handler[Any, Throwable, Request, Response] = {
         val encodedPath = path.encode
@@ -82,7 +82,7 @@ object HelloRoutes:
   
       for{
           path <- pathExtractor
-          request <- requestExtractor
+          // request <- requestExtractor  //request is not used
           result  <- staticFileHandler(path).contramap[(Path, Request)](_._2)         
         } yield result
           
