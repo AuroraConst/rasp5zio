@@ -13,7 +13,6 @@ trait Payload :
   def payload:Array[Byte] = jsonPayload.getBytes()
 
 
-
 trait ScenePayloadId extends Payload :
   val id: Int
   def jsonPayload = SceneRecallPayload(id).toJson
@@ -21,27 +20,3 @@ trait ScenePayloadId extends Payload :
 trait Topic:
   val topic: String
 
-
-object MasterBedroomLightsSet extends Topic :
-  override val topic: String = "zigbee2mqtt/Master Bedroom Lights/set"
-  enum  SceneType(_id: Int) extends ScenePayloadId :
-    override val id = _id
-    case On() extends SceneType(0)
-    case Half() extends SceneType(3)
-    case Dim() extends SceneType(4)
-    case Off() extends SceneType(2)
-
-object MasterBedroomHeatersSet extends Topic :
-  override val topic = "zigbee2mqtt/Master Bedroom Heaters/set"
-  enum SceneType(_id:Int) extends ScenePayloadId :
-    override val id = _id
-    case On() extends SceneType(20)
-    case Off() extends SceneType(21)   
-    case Half() extends SceneType(22)
-
-object GarageBikeCharger extends Topic :
-  override val topic = "zigbee2mqtt/Garage bike charger/set"
-  enum SceneType(_id:Int) extends ScenePayloadId :
-    override val id = _id
-    case On() extends SceneType(31)
-    case Off() extends SceneType(35)
