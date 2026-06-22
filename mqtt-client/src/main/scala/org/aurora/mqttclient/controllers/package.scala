@@ -1,5 +1,8 @@
 package org.aurora.mqttclient.controllers
 
+
+
+
 import org.aurora.mqttclient.devices.ThirdRealityPlugCodec
 import org.aurora.mqttclient.utils.Publisher
 
@@ -25,11 +28,11 @@ trait ThirdRealityPlugControl :
 
   
 
-  def startCharging(hour:Int)  =
+  def startCharging(hour:Int, minute:Int = 0)  =
     import java.time.{Duration, LocalDateTime, LocalTime, ZoneId}
     val zoneId: ZoneId = ZoneId.systemDefault()
     val now = LocalDateTime.now(zoneId)
-    val targetTime = LocalTime.of(hour, 0)
+    val targetTime = LocalTime.of(hour, minute)
   
     // Create today's target hour
     val nextHour = now.`with`(targetTime)
