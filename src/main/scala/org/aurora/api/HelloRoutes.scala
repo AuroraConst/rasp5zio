@@ -9,6 +9,8 @@ import zio.http.template._
 import org.aurora.dto.Hello
 import zio.http.Body.ContentType
 
+import org.aurora.mqttclient.controllers.scenes.MasterBedroomSceneController
+
 /**
  * for more information on zio handlers:
   https://ziohttp.com/reference/handler/
@@ -98,6 +100,8 @@ object HelloRoutes:
     Method.GET / "hello" / string("name") -> 
       handler{ (name: String, _: Request) => Response.text(s"Hello, $name!") },
     Method.GET / "pwd"  -> handler{ Response.text(s"Current working directory: ${os.pwd}") },
+    Method.GET / "masterlightson" -> handler{ MasterBedroomSceneController.on;Response.text("Master lights on!") },
+    Method.GET / "masterlightsoff" -> handler{ MasterBedroomSceneController.off;Response.text("Master lights off!") },
 
   ).sandbox
 

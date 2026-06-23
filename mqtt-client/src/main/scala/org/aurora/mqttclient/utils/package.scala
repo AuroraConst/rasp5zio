@@ -26,7 +26,7 @@ object Publisher:
   def publish(topic:String, scenePayload: Payload) =
     init //ensure the publisher is connected before publishing
     publisher.publish(topic, scenePayload.payload, 0, false)
-    disconnect()
+    // disconnect()
 
   def disconnect() = publisher.disconnect()  
 
