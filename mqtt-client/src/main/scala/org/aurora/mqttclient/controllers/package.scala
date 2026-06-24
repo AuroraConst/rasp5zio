@@ -10,7 +10,7 @@ trait ThirdRealityPlugControl :
   val device = ThirdRealityPlugCodec("Plug Garage/set")
   val maxDurationSeconds = 18000 // 5 hours in seconds
 
-  def turnOn: Unit = 
+  def turnOnFor5hours: Unit = 
     Publisher.publish(device.topic, 
     ThirdRealityPlugCodec.Setters(
       countdown_to_turn_on = 0,
