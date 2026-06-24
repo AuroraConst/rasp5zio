@@ -39,7 +39,7 @@ object Boot extends ZIOAppDefault:
   //     }
   //     .orDie
 
-  val routes = HelloRoutes.app ++ StaticFileRoutes.app  @@  Middleware.cors(config) //++HttpRoutes.app ++ HealthCheckRoutes.app
+  val routes = MyPi5Routes.app ++ StaticFileRoutes.app  @@  Middleware.cors(config) //++HttpRoutes.app ++ HealthCheckRoutes.app
 
   private val program = Server
     .serve(routes)

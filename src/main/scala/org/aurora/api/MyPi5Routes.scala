@@ -9,13 +9,13 @@ import zio.http.template._
 import org.aurora.dto.Hello
 import zio.http.Body.ContentType
 
-import org.aurora.mqttclient.controllers.scenes.MasterBedroomSceneController
-
+import org.aurora.mqttclient.controllers.scenes.{MasterBedroomSceneController, GarageBikeChargerSceneController}
+import org.aurora.mqttclient.controllers.BikePlugControl
 /**
  * for more information on zio handlers:
   https://ziohttp.com/reference/handler/
 */
-object HelloRoutes: 
+object MyPi5Routes: 
   import laika.api.Transformer
   import laika.format.{HTML, Markdown}
   import laika.config.SyntaxHighlighting
@@ -102,7 +102,9 @@ object HelloRoutes:
     Method.GET / "pwd"  -> handler{ Response.text(s"Current working directory: ${os.pwd}") },
     Method.GET / "masterlightson" -> handler{ MasterBedroomSceneController.on;Response.text("Master lights on!") },
     Method.GET / "masterlightsoff" -> handler{ MasterBedroomSceneController.off;Response.text("Master lights off!") },
-
+    Method.GET / "pluggaragebikeon" -> handler{ GarageBikeChargerSceneController.on;Response.text("Garage bike charger on!") },
+    Method.GET / "pluggaragebikeoff" -> handler{ GarageBikeChargerSceneController.off;Response.text("Garage bike charger off!") },
+    Method.GET / "pluggarageauto" -> handler{BikePlugControl.startCharging(4);Response.text("auto charge at 4:00 a.m.") }
   ).sandbox
 
 
