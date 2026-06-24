@@ -5,7 +5,7 @@ import org.aurora.mqttclient.utils.Publisher
 
 
 object YetiChargerPlugControl extends ThirdRealityPlugControl :
-  override val device = ThirdRealityPlugCodec("Plug Master Bedroom/set")
+  override val device = ThirdRealityPlugCodec("Plug Yeti charger/set")
   override val maxDurationSeconds = 1500 // 25 minutes in seconds
 
    def turnOnFor25Minutes: Unit = 
