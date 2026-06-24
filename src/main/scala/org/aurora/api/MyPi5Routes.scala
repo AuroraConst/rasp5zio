@@ -9,8 +9,6 @@ import zio.http.template._
 import org.aurora.dto.Hello
 import zio.http.Body.ContentType
 
-import org.aurora.mqttclient.controllers.scenes.{MasterBedroomSceneController, GarageBikeChargerSceneController}
-import org.aurora.mqttclient.controllers.BikePlugControl
 /**
  * for more information on zio handlers:
   https://ziohttp.com/reference/handler/
@@ -99,12 +97,6 @@ object MyPi5Routes:
     Method.GET / "hello"        -> Handler.text("hello"),
     Method.GET / "hello" / string("name") -> 
       handler{ (name: String, _: Request) => Response.text(s"Hello, $name!") },
-    Method.GET / "pwd"  -> handler{ Response.text(s"Current working directory: ${os.pwd}") },
-    Method.GET / "masterlightson" -> handler{ MasterBedroomSceneController.on;Response.text("Master lights on!") },
-    Method.GET / "masterlightsoff" -> handler{ MasterBedroomSceneController.off;Response.text("Master lights off!") },
-    Method.GET / "pluggaragebikeon" -> handler{ GarageBikeChargerSceneController.on;Response.text("Garage bike charger on!") },
-    Method.GET / "pluggaragebikeoff" -> handler{ BikePlugControl.turnOff;Response.text("Garage bike charger off!") },
-    Method.GET / "pluggarageauto" -> handler{BikePlugControl.startCharging(4);Response.text("auto charge at 4:00 a.m.") }
+    Method.GET / "pwd"  -> handler{ Response.text(s"Current working directory: ${os.pwd}") }
   ).sandbox
-
 
