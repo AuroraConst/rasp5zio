@@ -103,7 +103,7 @@ object MyPi5Routes:
     Method.GET / "masterlightson" -> handler{ MasterBedroomSceneController.on;Response.text("Master lights on!") },
     Method.GET / "masterlightsoff" -> handler{ MasterBedroomSceneController.off;Response.text("Master lights off!") },
     Method.GET / "pluggaragebikeon" -> handler{ GarageBikeChargerSceneController.on;Response.text("Garage bike charger on!") },
-    Method.GET / "pluggaragebikeoff" -> handler{ GarageBikeChargerSceneController.off;Response.text("Garage bike charger off!") },
+    Method.GET / "pluggaragebikeoff" -> handler{ BikePlugControl.turnOff;Response.text("Garage bike charger off!") },
     Method.GET / "pluggarageauto" -> handler{BikePlugControl.startCharging(4);Response.text("auto charge at 4:00 a.m.") }
   ).sandbox
 
