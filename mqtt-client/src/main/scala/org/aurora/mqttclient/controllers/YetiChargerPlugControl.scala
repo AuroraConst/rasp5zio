@@ -1,16 +1,14 @@
 package org.aurora.mqttclient.controllers
 
 import org.aurora.mqttclient.devices.ThirdRealityPlugCodec
-
-
 import org.aurora.mqttclient.utils.Publisher
 
-object BikePlugControl extends ThirdRealityPlugControl :
-  override val device = ThirdRealityPlugCodec("Plug Garage/set")
-  override val maxDurationSeconds = 18000 // 5 hours in seconds
 
-  
-  def turnOnFor5hours: Unit = 
+object YetiChargerPlugControl extends ThirdRealityPlugControl :
+  override val device = ThirdRealityPlugCodec("Plug Master Bedroom/set")
+  override val maxDurationSeconds = 1500 // 25 minutes in seconds
+
+   def turnOnFor25Minutes: Unit = 
     Publisher.publish(device.topic, 
     ThirdRealityPlugCodec.Setters(
       countdown_to_turn_on = 0,
@@ -18,3 +16,5 @@ object BikePlugControl extends ThirdRealityPlugControl :
       state = "ON"
     )
   )
+
+
