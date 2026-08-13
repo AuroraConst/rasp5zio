@@ -8,7 +8,7 @@ import org.aurora.mqttclient.controllers.{BikePlugControl, YetiChargerPlugContro
 
 object MqttRoutes:
   val mqqtapp = Routes(
-  Method.GET / "masterlightson" -> handler{ MasterBedroomSceneController.on;Response.text("Master lights on!") },
+  Method.GET / "masterlightson" -> handler{ MasterBedroomSceneController.on;Response.text("Master lights on!")},
   Method.GET / "masterlightsoff" -> handler{ MasterBedroomSceneController.off;Response.text("Master lights off!") },
   Method.GET / "masterlightsdim" -> handler{ MasterBedroomSceneController.dim;Response.text("Master lights dim") },
   Method.GET / "pluggaragebikeon" -> handler{ BikePlugControl.turnOnFor5hours;Response.text("Garage bike charger on!") },

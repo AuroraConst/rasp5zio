@@ -8,7 +8,7 @@ import zio.json._
 import zio.http.template._
 import org.aurora.dto.Hello
 import zio.http.Body.ContentType
-
+import zio.http.Header.{CacheControl, Expires}
 /**
  * for more information on zio handlers:
   https://ziohttp.com/reference/handler/
@@ -79,7 +79,7 @@ object MyPi5Routes:
       def staticFileHandler(path: Path): Handler[Any, Throwable, Request, Response] = {
         val encodedPath = path.encode
         val basePathRevised = revisedPath(encodedPath)
-        Handler.fromFile(os.Path(basePathRevised).toIO )
+        Handler.fromFile(os.Path(basePathRevised).toIO ).addHeader(CacheControl.NoCache).addHeader(CacheControl.NoStore).addHeader(CacheControl.MustRevalidate)
       }  
   
       for{
