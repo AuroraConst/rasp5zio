@@ -16,6 +16,8 @@
 ## Zio Rasp5 app 🍓
 - [View static resources](http://mypi5.local:8080/static)
 - [Charge bike overnight](http://mypi5.local:8080/pluggarageauto)
+- [Charge bike now](http://mypi5.local:8080/pluggaragebikeon)
+- [Charge bike off](http://mypi5.local:8080/pluggaragebikeoff)
 - [Master Lights On](http://mypi5.local:8080/masterlightson)
 - [Master Lights Off](http://mypi5.local:8080/masterlightsoff)
 - [Master Lights Dim](http://mypi5.local:8080/masterlightsdim)
