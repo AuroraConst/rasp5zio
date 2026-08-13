@@ -26,6 +26,7 @@ lazy val root = (project in file("."))
     commonSettings,
     name           := "rasp5zio",
 
+
     libraryDependencies ++= Seq(
       "io.getquill"   %% "quill-jdbc-zio"      % quillVersion excludeAll (
         ExclusionRule(organization = "org.scala-lang.modules")
@@ -83,6 +84,9 @@ lazy val mqttClient = (project in file("mqtt-client"))
 
     //allows reading zio console input otherwise the forked process terminates before any input can be read!!!
     connectInput := true,  
+
+    libraryDependencies += "com.softwaremill.sttp.client3" %% "zio" % "3.11.0",
+
 
     libraryDependencies ++= Seq(
       "org.eclipse.paho" % "org.eclipse.paho.client.mqttv3" % "1.2.5",

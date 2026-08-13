@@ -15,6 +15,7 @@
 # Main
 ## Zio Rasp5 app 🍓
 - [View static resources](http://mypi5:8080/static)
+- [Charge bike overnight](http://mypi5:8080/pluggarageauto)
 
 ## Gateway D-Link Eagle Pro Model R18 🛜
 - [Front End](http://r18-2cfb)
