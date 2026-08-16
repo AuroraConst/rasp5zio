@@ -1,12 +1,11 @@
 # docs/site/README.md
 - I used Laikahtml from sbt plugin to generate html from markdown files in docs/site
-
 # Important Notes
 - Starlink uses CGNAT (Carrier-Grade NAT)Starlink  so port forwarding from my router is impossible
 - I need to use Cloud Flair or Tailscale to tunnel
 
 ## Tailscale
-- https://login.tailscale.com/admin/machines
+- [list of tailscale machines](https://login.tailscale.com/admin/machines)
 - note, i had to confure yaml file for zigbee2mqtt to listen to host 0.0.0.0 instead of 192.168.0.200 which means to listen to all network devices (including tailscale's virtual device tailscale0)
 
 ## Note for DNS naming, look at D-Link configuration of names
@@ -21,6 +20,10 @@
 - [Master Lights On](http://mypi5.local:8080/masterlightson)
 - [Master Lights Off](http://mypi5.local:8080/masterlightsoff)
 - [Master Lights Dim](http://mypi5.local:8080/masterlightsdim)
+
+## Vite Mqqt App ⭐⭐⭐
+- [App](http://localhost:8080/app)
+
 
 ## Gateway D-Link Eagle Pro Model R18 🛜
 - [Front End](http://r18-2cfb)

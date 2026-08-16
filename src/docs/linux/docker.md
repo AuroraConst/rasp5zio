@@ -1,6 +1,5 @@
 
 ### Docker
-
 ## Common Commands
 - `docker ps -a` (list all containers)
 - `docker start <containername>`
