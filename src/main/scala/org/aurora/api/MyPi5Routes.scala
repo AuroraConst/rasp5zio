@@ -34,14 +34,14 @@ object MyPi5Routes:
       for{
           path <- Handler.param[(Path, Request)](_._1)//pathExtractor
           r    <- handler{ZIO.logInfo(s"Request for path: $path").as(Response.text(s"Request for path: $path"))}
-          // response  <- fileutils.staticFileHandler(path).contramap[(Path, Request)](_._2)         
-        } yield r //response
+          response  <- fileutils.staticFileHandler(path).contramap[(Path, Request)](_._2)         
+        } yield response
     },
     Method.GET / "mqttapp" -> handler{ Response.redirect(URL(Path.root / "docs"/ "mqttapp" / "index.html")) },
-    Method.GET / "log" /trailing-> handler{ 
+    Method.GET / "log" -> handler{ 
+      val pathExtractor: Handler[Any, Nothing, (Path, Request), Path] = Handler.param[(Path, Request)](_._1)  //returns the path
       for {
-        path <- Handler.param[(Path, Request)](_._1)
-        x <- handler{ZIO.logInfo("Hello from log handler").as(Response.text(s"Logged a message! $path"))}
+        x <-ZIO.logInfo("Hello from log handler").as(Response.text("Logged a message! $path"))
       } yield x
     },
     Method.GET / "hello"        -> Handler.text("hello"),
