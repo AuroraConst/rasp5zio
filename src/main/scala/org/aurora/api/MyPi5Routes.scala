@@ -29,7 +29,7 @@ object MyPi5Routes:
   val app = Routes(
     Method.GET / "" -> handler {Response.redirect(URL(Path.root / "docs" / "index.html"))},//(Path.root / "docs" /"index.html")) },
     Method.GET / "docs" ->  handler {Response.redirect(URL(Path.root / "docs" / "index.html")) }, 
-    Method.GET / "docs" / trailing ->   handler{ 
+    Method.GET / "docs" / trailing ->   handler{  
       // val pathExtractor: Handler[Any, Nothing, (Path, Request), Path] = Handler.param[(Path, Request)](_._1)  //returns the path
       for{
           path <- Handler.param[(Path, Request)](_._1)//pathExtractor
@@ -40,7 +40,8 @@ object MyPi5Routes:
     Method.GET / "mqttapp" -> handler{ Response.redirect(URL(Path.root / "docs"/ "mqttapp" / "index.html")) },
     Method.GET / "log" -> handler{ 
       for {
-        x <-ZIO.logInfo("Hello from log handler").as(Response.text("Logged a message!"))
+        path <- Handler.param[(Path, Request)](_._1)
+        x <- handler{ZIO.logInfo("Hello from log handler").as(Response.text("Logged a message! $path"))}
       } yield x
     },
     Method.GET / "hello"        -> Handler.text("hello"),
