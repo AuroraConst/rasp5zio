@@ -38,7 +38,7 @@ object MyPi5Routes:
         } yield r //response
     },
     Method.GET / "mqttapp" -> handler{ Response.redirect(URL(Path.root / "docs"/ "mqttapp" / "index.html")) },
-    Method.GET / "log" -> handler{ 
+    Method.GET / "log" /trailing-> handler{ 
       for {
         path <- Handler.param[(Path, Request)](_._1)
         x <- handler{ZIO.logInfo("Hello from log handler").as(Response.text("Logged a message! $path"))}
