@@ -41,7 +41,7 @@ object MyPi5Routes:
     Method.GET / "log" /trailing-> handler{ 
       for {
         path <- Handler.param[(Path, Request)](_._1)
-        x <- handler{ZIO.logInfo("Hello from log handler").as(Response.text("Logged a message! $path"))}
+        x <- handler{ZIO.logInfo("Hello from log handler").as(Response.text(s"Logged a message! $path"))}
       } yield x
     },
     Method.GET / "hello"        -> Handler.text("hello"),
