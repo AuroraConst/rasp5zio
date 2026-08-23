@@ -33,8 +33,9 @@ object MyPi5Routes:
       // val pathExtractor: Handler[Any, Nothing, (Path, Request), Path] = Handler.param[(Path, Request)](_._1)  //returns the path
       for{
           path <- Handler.param[(Path, Request)](_._1)//pathExtractor
-          response  <- fileutils.staticFileHandler(path).contramap[(Path, Request)](_._2)         
-        } yield response
+          r    <- handler{ZIO.logInfo(s"Request for path: $path").as(Response.text(s"Request for path: $path"))}
+          // response  <- fileutils.staticFileHandler(path).contramap[(Path, Request)](_._2)         
+        } yield r //response
     },
     Method.GET / "mqttapp" -> handler{ Response.redirect(URL(Path.root / "docs"/ "mqttapp" / "index.html")) },
     Method.GET / "log" -> handler{ 
