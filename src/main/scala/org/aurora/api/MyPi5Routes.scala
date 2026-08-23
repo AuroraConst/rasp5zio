@@ -36,7 +36,7 @@ object MyPi5Routes:
           response  <- fileutils.staticFileHandler(path).contramap[(Path, Request)](_._2)         
         } yield response
     },
-    Method.GET / "app" -> handler{ Response.redirect(URL(Path.root / "docs"/ "app" / "index.html")) },
+    Method.GET / "mqttapp" -> handler{ Response.redirect(URL(Path.root / "docs"/ "mqttapp" / "index.html")) },
     Method.GET / "log" -> handler{ 
       for {
         x <-ZIO.logInfo("Hello from log handler").as(Response.text("Logged a message!"))

@@ -22,7 +22,7 @@
 - [Master Lights Dim](http://mypi5.local:8080/masterlightsdim)
 
 ## Vite Mqqt App ⭐⭐⭐
-- [App](http://mypi5.local:8080/app)
+- [App](http://mypi5.local:8080/mqttapp)
 
 
 ## Gateway D-Link Eagle Pro Model R18 🛜
