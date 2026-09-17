@@ -5,6 +5,6 @@ import org.aurora.mqttclient.utils.Publisher
 
 
 object HeaterMasterBedroomPlugControl extends ThirdRealityPlugControl :
-  override val device = ThirdRealityPlugCodec("Plug Master Bedroom")
+  override val device = ThirdRealityPlugCodec("Plug Master Bedroom/set")
 
 
