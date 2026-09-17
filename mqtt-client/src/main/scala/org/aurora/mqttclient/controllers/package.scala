@@ -18,7 +18,14 @@ trait ThirdRealityPlugControl :
       state = "OFF"
     ))
 
-  
+  def turnOn: Unit = 
+    Publisher.publish(device.topic, 
+    ThirdRealityPlugCodec.Setters(
+      countdown_to_turn_on = 0,
+      countdown_to_turn_off = 0,
+      state = "ON"
+    ))
+
 
   def startCharging(hour:Int, minute:Int = 0)  =
     import java.time.{Duration, LocalDateTime, LocalTime, ZoneId}

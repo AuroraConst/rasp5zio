@@ -3,7 +3,7 @@ import zio._
 import zio.http._
 
 import org.aurora.mqttclient.controllers.scenes.{MasterBedroomSceneController, GarageBikeChargerSceneController}
-import org.aurora.mqttclient.controllers.{BikePlugControl, YetiChargerPlugControl}
+import org.aurora.mqttclient.controllers.{BikePlugControl, YetiChargerPlugControl,HeaterBathroomPlugControl}
 
 
 object MqttRoutes:
@@ -15,6 +15,7 @@ object MqttRoutes:
   Method.GET / "pluggaragebikeoff" -> handler{ BikePlugControl.turnOff;Response.text("Garage bike charger off!") },
   Method.GET / "pluggarageauto" -> handler{BikePlugControl.startCharging(4);Response.text("auto charge at 4:00 a.m.") },
   Method.GET / "plugyetichargeron" -> handler{ YetiChargerPlugControl.turnOnFor25Minutes; Response.text("Yeti charger on for 25 minutes!") },
-  Method.GET / "plugyetichargeroff" -> handler{ YetiChargerPlugControl.turnOff; Response.text("Yeti charger off!") }
+  Method.GET / "plugyetichargeroff" -> handler{ YetiChargerPlugControl.turnOff; Response.text("Yeti charger off!") },
+  Method.GET / "plugbathroomheateron" -> handler{HeaterBathroomPlugControl.turnOn; Response.text("Heater On") }
   ).sandbox 
 
