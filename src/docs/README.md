@@ -46,13 +46,13 @@
 - [Front End](http://mypi5:9090/)
 - note that the Zigbee Dongle is attached to *homeassistant.local* using *ser2net* on port 20108 (see configuration.yaml)
 - config file is in */opt/zigbee2mqtt/data/configuration.yaml*
+## [Plex Front End](http://raspnas:32400/)
+## [Crypto Tax] (https://app.koinly.io/): docere (corporate) and docerecrypto (personal)
+## [Keychron Nape (trackball)](https://launcher.keychron.com/)
 
-## Plex
-  [Front End](http://raspnas:32400/)
+
 
 ## General Notes:
-
-
 ### configuring network devices with cli
 > sudo nmtui
 - (network management tool ui) this is where I configured static IP addresses
